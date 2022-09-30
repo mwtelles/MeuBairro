@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 
 import { useFonts } from 'expo-font';
+import 'react-native-gesture-handler';
 import AppStack from './src/navigation/AppStack';
 import AuthStack from './src/navigation/AuthStack';
 
@@ -17,8 +18,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <AuthStack />
-      {/* <AuthStack /> */}
+     {/* <AuthStack /> */}
+       <AppStack /> 
     </NavigationContainer>
   );
 }
