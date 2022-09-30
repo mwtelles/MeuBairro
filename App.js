@@ -10,6 +10,7 @@ export default function App() {
 
   let [fontsLoaded] = useFonts({
     'Roboto-Medium': require('./src/fonts/Roboto-Medium.ttf'),
+    'Roboto-Regular': require('./src/fonts/Roboto-Regular.ttf'),
   });
 
   if (!fontsLoaded) {
