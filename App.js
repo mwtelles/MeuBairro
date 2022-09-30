@@ -1,7 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 
 import { useFonts } from 'expo-font';
-import { View, Text } from 'react-native';
 import AppStack from './src/navigation/AppStack';
 import AuthStack from './src/navigation/AuthStack';
 
