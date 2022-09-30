@@ -1,7 +1,10 @@
-import { useEffect, useCallback } from 'react';
-import OnboardingScreen from './src/screens/OnBoardingScreen';
+import { NavigationContainer } from '@react-navigation/native';
 
 import { useFonts } from 'expo-font';
+import { View, Text } from 'react-native';
+import AppStack from './src/navigation/AppStack';
+import AuthStack from './src/navigation/AuthStack';
+
 
 export default function App() {
 
@@ -14,7 +17,10 @@ export default function App() {
   }
 
   return (
-      <OnboardingScreen />
+    <NavigationContainer>
+      <AuthStack />
+      {/* <AuthStack /> */}
+    </NavigationContainer>
   );
 }
 
