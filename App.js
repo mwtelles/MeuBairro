@@ -3,7 +3,7 @@ import React from 'react';
 import { useFonts } from 'expo-font';
 import 'react-native-gesture-handler';
 import { AuthProvider } from './src/context/AuthContext';
-import AppNav from './src/navigation/AppNav';
+import {AppNav} from './src/navigation/AppNav';
 
 
 function App() {
