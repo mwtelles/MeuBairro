@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, SafeAreaView, View, Image, TouchableOpacity } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -6,8 +6,12 @@ import { FontAwesome } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import CustomButton from '../components/CustomButton';
 import InputField from '../components/InputField';
+import { AuthContext } from '../context/AuthContext';
 
 const LoginScreen = ({ navigation }) => {
+
+  const {login} = useContext(AuthContext);
+
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
       <View style={{ paddingHorizontal: 25 }}>
@@ -31,7 +35,7 @@ const LoginScreen = ({ navigation }) => {
           fieldButtonFunction={() => { }}
         />
 
-        <CustomButton label={"Login"} onPress={() => { }} />
+        <CustomButton label={"Login"} onPress={() => {login()}} />
 
         <Text style={{ textAlign: 'center', color: '#666', marginBottom: 30 }}>Ou, conecte-se com...</Text>
 

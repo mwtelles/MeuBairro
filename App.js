@@ -1,12 +1,12 @@
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
 
 import { useFonts } from 'expo-font';
 import 'react-native-gesture-handler';
-import AppStack from './src/navigation/AppStack';
-import AuthStack from './src/navigation/AuthStack';
+import { AuthProvider } from './src/context/AuthContext';
+import AppNav from './src/navigation/AppNav';
 
 
-export default function App() {
+function App() {
 
   let [fontsLoaded] = useFonts({
     'Roboto-Medium': require('./src/fonts/Roboto-Medium.ttf'),
@@ -18,10 +18,12 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <AuthStack /> 
-      {/* <AppStack /> */}
-    </NavigationContainer>
+    <AuthProvider>
+      <AppNav />
+    </AuthProvider>
+
   );
 }
+
+export default App;
 
