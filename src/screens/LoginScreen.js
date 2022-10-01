@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, SafeAreaView, View, Image, TouchableOpacity } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -9,6 +9,9 @@ import InputField from '../components/InputField';
 import { AuthContext } from '../context/AuthContext';
 
 const LoginScreen = ({ navigation }) => {
+
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const {login} = useContext(AuthContext);
 
@@ -24,6 +27,8 @@ const LoginScreen = ({ navigation }) => {
           icon={<MaterialIcons name="alternate-email" size={20} color="#666" style={{ marginRight: 5 }}
           />}
           keyboardType='email-address'
+          value={email}
+          onChangeText={text => setEmail(text)}
         />
         <InputField
           label={'Senha'}
@@ -33,9 +38,11 @@ const LoginScreen = ({ navigation }) => {
           inputType="password"
           fieldButtonLabel={"Esqueceu a senha?"}
           fieldButtonFunction={() => { }}
+          value={password}
+          onChangeText={text => setPassword(text)}
         />
 
-        <CustomButton label={"Login"} onPress={() => {login()}} />
+        <CustomButton label={"Login"} onPress={() => {login(email, password)}} />
 
         <Text style={{ textAlign: 'center', color: '#666', marginBottom: 30 }}>Ou, conecte-se com...</Text>
 
