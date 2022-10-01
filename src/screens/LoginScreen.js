@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
       <View style={{ paddingHorizontal: 25 }}>
@@ -42,7 +42,7 @@ const LoginScreen = () => {
 
         <View style={{flexDirection:'row', justifyContent:'center', marginBottom:30}}>
         <Text>Ainda não possui conta?</Text>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
         <Text style={{color:'#AD40AF',fontWeight:'700'}}> Cadastre-se</Text>
         </TouchableOpacity>
         </View>
