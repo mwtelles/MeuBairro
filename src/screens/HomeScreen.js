@@ -1,5 +1,5 @@
 import React, { useContext, useState} from "react";
-import { View, TouchableOpacity, Modal, Text} from "react-native";
+import { View, TouchableOpacity, Modal, Text, StatusBar} from "react-native";
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from "../context/AuthContext";
@@ -20,23 +20,20 @@ export default function HomeScreen({ navigation }) {
     const [visibleButton, setVisibleButton] = useState(false);
 
     return (
-        <View style={{ flex: 1, }}>
-            <View
-                style={{
+        <View style={{ flex: 1}}>
+            <StatusBar barStyle="light" />
+            <View style={{
                     flexDirection: 'row',
                     zIndex: 2,
-                    marginTop: 15,
-                    maxWidth: '20%'
-
-                }}>
+                    maxWidth: '20%'}}>
                 <TouchableOpacity
                     onPress={() => navigation.openDrawer()}
                     style={{
-                        backgroundColor: '#fff',
-                        borderRadius: 25,
+                        marginTop:'20%',
+                        backgroundColor: 'rgba(231, 231, 231, 0.8)',
+                        borderRadius: 12,
                         padding: 18,
                         marginLeft: 15,
-                        marginTop: 25,
                     }}>
                     <MaterialIcons name="menu" size={24} color="black" />
                 </TouchableOpacity>
@@ -56,7 +53,7 @@ export default function HomeScreen({ navigation }) {
                     onPress={() => { setVisibleModal(true)}}
                     style={{
                         backgroundColor: '#53E88B',
-                        borderRadius: 25,
+                        borderRadius: 12,
                         padding: 18,
                         marginRight: 15,
                         marginBottom: 25,

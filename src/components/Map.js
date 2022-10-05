@@ -18,8 +18,8 @@ const Map = () => {
   const [region, setRegion] = useState(null);
 
   const [pin, setPin] = React.useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: -22.4070467,
+    longitude: -43.66119,
   });
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Map = () => {
       (async () => {
           let location = await Location.getCurrentPositionAsync({});
           setLocation(location);
-          // console.log(location.coords.latitude, location.coords.longitude);
+          console.log(location.coords.latitude, location.coords.longitude);
           setRegion({
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
@@ -64,8 +64,8 @@ const Map = () => {
         }}
         mapType='standard'
         showsMyLocationButton={true}
-        minZoomLevel={18}
-        maxZoomLevel={16}
+        minZoomLevel={16}
+        maxZoomLevel={19}
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
@@ -83,7 +83,10 @@ const Map = () => {
         }}
         >
         <Marker
-          coordinate={pin}
+          coordinate={{
+          latitude: -22.4070233,
+          longitude: -43.6610083
+          }}
           title='teste'
           description='descricao'
           >
