@@ -41,7 +41,7 @@ const Map = () => {
       (async () => {
           let location = await Location.getCurrentPositionAsync({});
           setLocation(location);
-          console.log(location.coords.latitude, location.coords.longitude);
+          // console.log(location.coords.latitude, location.coords.longitude);
           setRegion({
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
@@ -62,11 +62,10 @@ const Map = () => {
           width: width,
           height: height,
         }}
-        onMapReady={() => { }}
         mapType='standard'
         showsMyLocationButton={true}
-        minZoomLevel={15}
-        maxZoomLevel={19}
+        minZoomLevel={18}
+        maxZoomLevel={16}
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
