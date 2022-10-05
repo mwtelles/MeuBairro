@@ -17,6 +17,11 @@ const Map = () => {
 
   const [region, setRegion] = useState(null);
 
+  const [pin, setPin] = React.useState({
+    latitude: 0,
+    longitude: 0,
+  });
+
   useEffect(() => {
       getLocationPermission()
       getUserLocation()
@@ -79,23 +84,10 @@ const Map = () => {
         }}
         >
         <Marker
-          coordinate={
-            {
-              latitude: -22.4070233,
-              longitude: -43.6610083,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
+          coordinate={pin}
           title='teste'
           description='descricao'
-          onSelect={() => navigation.navigate('Notificações')}
           >
-
-          <View style={{backgroundColor:'white', padding:15, borderRadius:100}}>
-            <FontAwesome name="trash-o" size={24} color="black" />
-          </View>
-
-
         </Marker>
       </MapView>
     </View>

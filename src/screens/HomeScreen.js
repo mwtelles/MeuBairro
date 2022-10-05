@@ -9,6 +9,11 @@ export default function HomeScreen({ navigation }) {
 
     const { userInfo } = useContext(AuthContext);
 
+    const [pin, setPin] = React.useState({
+        latitude: null,
+        longitude: null,
+      });
+
     return (
         <View style={{ flex: 1, }}>
             <View
@@ -42,7 +47,14 @@ export default function HomeScreen({ navigation }) {
 
                 }}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Notificações')}
+                    onPress={() => {
+                          // console.log("onUserLocationChange", e.nativeEvent.coordinate);
+                
+                          setPin({
+                            latitude: -22.4070467,
+                            longitude: -43.66119
+                          })
+                        }}
                     style={{
                         backgroundColor: '#53E88B',
                         borderRadius: 25,

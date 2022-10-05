@@ -3,7 +3,6 @@ import { Text, SafeAreaView, View, Image, TouchableOpacity } from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { TextInput } from 'react-native-gesture-handler';
 import CustomButton from '../components/CustomButton';
 import InputField from '../components/InputField';
 import { AuthContext } from '../context/AuthContext';
