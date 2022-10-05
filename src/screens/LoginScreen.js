@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={{ alignItems: 'center' }}>
           <Image source={require('../assets/images/illustrations/login.jpg')} style={{ height: 300, width: 300 }} />
         </View>
-        <Text style={{ fontFamily: 'Roboto-Medium', fontSize: 28, fontWeight: '500', color: '#333', marginBottom: 30, textAlign: 'center' }}>Login</Text>
+        <Text style={{ fontFamily: 'Roboto-Medium', fontSize: 28, fontWeight: '700', color: '#333', marginBottom: 30, textAlign: 'center' }}>Conecte-se</Text>
         <InputField
           label={'Email'}
           icon={<MaterialIcons name="alternate-email" size={20} color="#666" style={{ marginRight: 5 }}
@@ -58,7 +58,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 30 }}>
           <Text>Ainda não possui conta?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-            <Text style={{ color: '#AD40AF', fontWeight: '700' }}> Cadastre-se</Text>
+            <Text style={{ color: '#15BE77', fontWeight: '700' }}> Cadastre-se</Text>
           </TouchableOpacity>
         </View>
       </View>

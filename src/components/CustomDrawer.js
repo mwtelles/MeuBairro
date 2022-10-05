@@ -3,6 +3,8 @@ import React, { useContext } from 'react'
 
 import { Ionicons } from '@expo/vector-icons';
 
+import { LinearGradient } from 'expo-linear-gradient';
+
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../context/AuthContext';
@@ -17,20 +19,21 @@ const CustomDrawer = (props) => {
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView
                 {...props}
-                contentContainerStyle={{ backgroundColor: '#8200d6' }}>
-                <ImageBackground
-                    source={require('../assets/images/menu-bg.jpeg')}
-                    style={{ padding: 20 }}>
+                contentContainerStyle={{ backgroundColor: '#53E88B' }}>
+                <LinearGradient
+                    colors={['#53E88B','#15BE77','#15BE77']}
+                    style={{ padding: 20 }}
+                >
                     <Image
                         source={require('../assets/images/illustrations/user-profile.jpg')}
-                        style={{ width: 80, height: 80, borderRadius: 40, marginBottom: 20 }} />
+                        style={{ width: 90, height: 90, borderRadius: 18, marginBottom: 20 }} />
                     <Text style={{ color: '#fff', fontSize: 18, fontFamily: 'Roboto-Medium' }}>{userInfo.result.user.name}</Text>
                     <View style={{ flexDirection: 'row', marginTop: 5, alignItems: 'baseline' }}>
                         <Ionicons name="ios-megaphone-outline" size={18} color="white" style={{ marginRight: 5 }} />
 
                         <Text style={{ color: '#fff', fontSize: 14, fontFamily: 'Roboto-Regular', marginTop: 5 }}>350 Interações</Text>
                     </View>
-                </ImageBackground>
+                </LinearGradient>
                 <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: 15 }}>
                     <DrawerItemList {...props} />
                 </View>

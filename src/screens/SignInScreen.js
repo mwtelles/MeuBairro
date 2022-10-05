@@ -28,15 +28,12 @@ const SignInScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{ paddingHorizontal: 25 }}>
-                <View style={{ alignItems: 'center' }}>
-                    <Image source={require('../assets/images/illustrations/login.jpg')} style={{ height: 300, width: 300 }} />
-                </View>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ paddingHorizontal: 25, paddingTop: 40 }}>
                 <Text style={{ fontFamily: 'Roboto-Medium', fontSize: 28, fontWeight: '500', color: '#333', marginBottom: 30, textAlign: 'center' }}>Cadastro</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 30 }}>
                     <Text>Já possui conta?</Text>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Text style={{ color: '#AD40AF', fontWeight: '700' }}> Conecte-se</Text>
+                        <Text style={{ color: '#15BE77', fontWeight: '700' }}> Conecte-se</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -64,13 +61,6 @@ const SignInScreen = ({ navigation }) => {
                     // onChangeText={text => setPassword(text)}
                 />
                 <InputField
-                    label={'Confirme sua senha'}
-                    icon={
-                        <MaterialIcons name="lock-outline" size={20} color="#666" style={{ marginRight: 5 }} />
-                    }
-                    inputType="password"
-                />
-                <InputField
                     label={'Data de Nascimento'}
                     icon={
                         <MaterialIcons name="calendar-today" size={20} color="#666" style={{ marginRight: 5 }} />
@@ -86,6 +76,7 @@ const SignInScreen = ({ navigation }) => {
                     // value={cpf}
                     // onChangeText={text => setCpf(text)}
                 />
+                
                 <InputField
                     label={'Estado'}
                     icon={

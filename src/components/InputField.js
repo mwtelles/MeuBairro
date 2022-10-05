@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function InputField ({label,icon,inputType,keyboardType, fieldButtonLabel, fieldButtonFunction, value, onChangeText}) {
   return (
-    <View style={{ flexDirection: 'row', borderBottomColor: '#ccc', borderBottomWidth: 1, paddingBottom: 8, marginBottom: 25, alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row', borderColor: '#ccc', borderWidth: 0.8, padding: 12, marginBottom: 25, alignItems: 'center', borderRadius: 8 }}>
           {icon}
           {inputType == 'password' ? ( 
           <TextInput 
@@ -23,7 +23,7 @@ export default function InputField ({label,icon,inputType,keyboardType, fieldBut
             onChangeText={onChangeText} 
           />)}
           <TouchableOpacity onPress={fieldButtonFunction}>
-          <Text style={{color:'#AD40AF', fontWeight: '700'}}>{fieldButtonLabel}</Text>
+          <Text style={{color:'#bbb', fontWeight: '700'}}>{fieldButtonLabel}</Text>
         </TouchableOpacity>
         </View>
   )

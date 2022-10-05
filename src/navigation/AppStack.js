@@ -17,26 +17,26 @@ const AppStack = () => {
         screenOptions={{
             headerShown: false,
             drawerLabelStyle: {marginLeft: -20, fontFamily: 'Roboto-Medium', fontSize:15},
-            drawerActiveBackgroundColor: '#aa18ea',
+            drawerActiveBackgroundColor: '#53E88B',
             drawerInactiveTintColor: '#333',
             drawerActiveTintColor: '#fff',
         }}>
-            <Drawer.Screen component={HomeScreen} name="Home" 
+            <Drawer.Screen component={HomeScreen} name="Inicio" 
             options={{drawerIcon: ({color}) => (
                 <AntDesign name="home" size={22} color={color} />
             )
             }}/>
-            <Drawer.Screen component={ProfileScreen} name="Profile" 
+            <Drawer.Screen component={ProfileScreen} name="Perfil" 
             options={{drawerIcon: ({color}) => (
                 <AntDesign name="user" size={22} color={color} />
             )
             }}/>
-            <Drawer.Screen component={ReportsScreen} name="Reports" 
+            <Drawer.Screen component={ReportsScreen} name="Notificações" 
             options={{drawerIcon: ({color}) => (
                 <AntDesign name="notification" size={22} color={color} />
             )
             }}/>
-            <Drawer.Screen component={SettingsScreen} name="Settings" 
+            <Drawer.Screen component={SettingsScreen} name="Definições" 
             options={{drawerIcon: ({color}) => (
                 <AntDesign name="setting" size={22} color={color} />
             )
