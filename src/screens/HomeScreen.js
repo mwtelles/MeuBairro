@@ -67,9 +67,11 @@ export default function HomeScreen({ navigation }) {
                 visible={visibleModal}
                 transparent={true}
                 onRequestClose={() => setVisibleModal(false)}
+                animationType="slide"
                 >
                 <ActionModal 
                 handleClose={() => setVisibleModal(false)}
+                handleNavigation={() => {navigation.navigate('Relatar Problema');setVisibleModal(false)}}
                 />
                 </Modal>
             </View>

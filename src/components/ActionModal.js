@@ -4,7 +4,7 @@ import CustomButton from './CustomButton'
 
 import { Ionicons } from '@expo/vector-icons';
 
-export function ActionModal({ handleClose }) {
+export function ActionModal({ handleClose, handleNavigation }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <TouchableOpacity style={{ flex: 1, zIndex: 9 }} onPress={handleClose}></TouchableOpacity>
@@ -37,7 +37,7 @@ export function ActionModal({ handleClose }) {
                         <Text style={{ color: '#000000', fontSize: 16, fontFamily: 'Inter-Medium', fontWeight: '700' }}>Vila Adolfo de Azevedo Jordão, 48 Centro - Vassouras RJ</Text>
                     </View>
                 </View>
-                <CustomButton label={'Criar relato'} onPress={() => { }} />
+                <CustomButton label={'Criar relato'} onPress={handleNavigation} />
             </View>
         </SafeAreaView>
     )

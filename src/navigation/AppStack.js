@@ -31,7 +31,7 @@ const AppStack = () => {
                 <AntDesign name="user" size={22} color={color} />
             )
             }}/>
-            <Drawer.Screen component={ReportsScreen} name="Notificações" 
+            <Drawer.Screen component={ReportsScreen} name="Relatar Problema" 
             options={{drawerIcon: ({color}) => (
                 <AntDesign name="notification" size={22} color={color} />
             )
