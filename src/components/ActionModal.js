@@ -4,7 +4,7 @@ import CustomButton from './CustomButton'
 
 import { Ionicons } from '@expo/vector-icons';
 
-export function ActionModal({ handleClose, handleNavigation }) {
+export function ActionModal({ handleClose, handleNavigation, address }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <TouchableOpacity style={{ flex: 1, zIndex: 9 }} onPress={handleClose}></TouchableOpacity>
@@ -34,7 +34,7 @@ export function ActionModal({ handleClose, handleNavigation }) {
                     </View>
                     <View style={{ flexDirection: 'column', paddingLeft: 10, paddingRight: 80 }}>
                         <Text>Sua Localização</Text>
-                        <Text style={{ color: '#000000', fontSize: 16, fontFamily: 'Inter-Medium', fontWeight: '700' }}>Vila Adolfo de Azevedo Jordão, 48 Centro - Vassouras RJ</Text>
+                        <Text style={{ color: '#000000', fontSize: 16, fontFamily: 'Inter-Medium', fontWeight: '700' }}>{`${address.street}, ${address.house} ${address.sublocality} - ${address.area}/${address.region}`}</Text>
                     </View>
                 </View>
                 <CustomButton label={'Criar relato'} onPress={handleNavigation} />

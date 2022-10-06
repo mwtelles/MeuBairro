@@ -2,6 +2,7 @@ import { View, Dimensions} from 'react-native'
 import React, {useState, useEffect } from 'react'
 import MapView from 'react-native-maps';
 
+
 import { FontAwesome } from '@expo/vector-icons';
 
 import * as Location from 'expo-location';
@@ -10,9 +11,9 @@ import { Circle, Marker } from 'react-native-maps';
 
 const { width, height } = Dimensions.get('screen')
 
-const Map = () => {
+const Map = ({ userLocation }) => {
 
-  const [location, setLocation] = useState(null);
+  const [userFirstLocation, setUserFirstLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
   const [region, setRegion] = useState(null);
@@ -38,17 +39,25 @@ const Map = () => {
   }
 
   function getUserLocation(location) {
-      (async () => {
+
+    
+    if(location) {
+      const { latitude, longitude } = location;
+      setUserFirstLocation(location);
+      if(latitude !== userFirstLocation.latitude) {
+        (async () => {
           let location = await Location.getCurrentPositionAsync({});
-          setLocation(location);
           console.log(location.coords.latitude, location.coords.longitude);
           setRegion({
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
           })
-      })();
+          userLocation(location);
+        })();
+      }
+    }
   }
 
   return (
@@ -69,6 +78,8 @@ const Map = () => {
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
+        
+        onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
         loadingEnabled={true}
         showsBuildings={false}
         showsTraffic={false}
