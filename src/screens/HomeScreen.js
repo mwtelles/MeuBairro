@@ -1,10 +1,11 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState, useCallback} from "react";
 import { View, TouchableOpacity, Modal, Text, StatusBar} from "react-native";
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from "../context/AuthContext";
 import Map from "../components/Map";
 import { ActionModal } from "../components/ActionModal";
+import { api } from '../services/api';
 
 export default function HomeScreen({ navigation }) {
 
@@ -15,9 +16,30 @@ export default function HomeScreen({ navigation }) {
     //     longitude: null,
     //   });
 
+    const [location, setLocation] = useState([]);
+    const [address, setAddress] = useState([]);
     const [visibleModal, setVisibleModal] = useState(false);
-
     const [visibleButton, setVisibleButton] = useState(false);
+
+    const getUserLocation = useCallback((location) => {
+        setLocation([location.coords.latitude, location.coords.longitude]);
+    }, [])
+
+    const openNotificationModal = async (location) => {
+
+        try {
+            const response = await api.get('/ReverseGeocode', {params: { location: `${location[0]}, ${location[1]}` }});
+            const data = response.data.results;
+            let address = data.find((item) => item.location_type === 'centroid' && item.type === 'route');
+            setAddress(address);
+            setVisibleModal(true)
+        }catch (err) {
+
+            console.log(err);
+
+        }
+
+    };
 
     return (
         <View style={{ flex: 1}}>
@@ -38,8 +60,7 @@ export default function HomeScreen({ navigation }) {
                     <MaterialIcons name="menu" size={24} color="black" />
                 </TouchableOpacity>
             </View>
-            <Map
-            />
+            <Map userLocation={getUserLocation}/>
             <View
                 style={{
                     flexDirection: 'row-reverse',
@@ -50,7 +71,7 @@ export default function HomeScreen({ navigation }) {
                 }}>
                 <TouchableOpacity
                     visible={visibleButton}
-                    onPress={() => { setVisibleModal(true)}}
+                    onPress={() => openNotificationModal(location)}
                     style={{
                         backgroundColor: '#53E88B',
                         borderRadius: 12,
@@ -66,7 +87,8 @@ export default function HomeScreen({ navigation }) {
                 onRequestClose={() => setVisibleModal(false)}
                 animationType="slide"
                 >
-                <ActionModal 
+                <ActionModal
+                address={address} 
                 handleClose={() => setVisibleModal(false)}
                 handleNavigation={() => {navigation.navigate('Relatar Problema');setVisibleModal(false)}}
                 />
