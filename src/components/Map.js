@@ -1,5 +1,5 @@
-import { View, Dimensions} from 'react-native'
-import React, {useState, useEffect } from 'react'
+import { View, Dimensions } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import MapView from 'react-native-maps';
 
 
@@ -13,7 +13,7 @@ const { width, height } = Dimensions.get('screen')
 
 const Map = ({ userLocation }) => {
 
-  const [userFirstLocation, setUserFirstLocation] = useState(null);
+  const [userFirstLocation, setUserFirstLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
 
   const [region, setRegion] = useState(null);
@@ -24,30 +24,29 @@ const Map = ({ userLocation }) => {
   });
 
   useEffect(() => {
-      getLocationPermission()
-      getUserLocation()
+    getLocationPermission()
+    getUserLocation()
   }, [])
 
   function getLocationPermission() {
-      (async () => {
-          let { status } = await Location.requestForegroundPermissionsAsync();
-          if (status !== 'granted') {
-              setErrorMsg('A Permissão para acessar a localização foi negada!');
-              return;
-          }
-      })();
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('A Permissão para acessar a localização foi negada!');
+        return;
+      }
+    })();
   }
 
   function getUserLocation(location) {
 
-    
-    if(location) {
+
+    if (location) {
       const { latitude, longitude } = location;
       setUserFirstLocation(location);
-      if(latitude !== userFirstLocation.latitude) {
+      if (latitude !== userFirstLocation.latitude) {
         (async () => {
           let location = await Location.getCurrentPositionAsync({});
-          console.log(location.coords.latitude, location.coords.longitude);
           setRegion({
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
@@ -78,7 +77,7 @@ const Map = ({ userLocation }) => {
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
-        
+
         onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
         loadingEnabled={true}
         showsBuildings={false}
@@ -92,15 +91,15 @@ const Map = ({ userLocation }) => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        >
+      >
         <Marker
           coordinate={{
-          latitude: -22.4070233,
-          longitude: -43.6610083
+            latitude: -22.4070233,
+            longitude: -43.6610083
           }}
           title='teste'
           description='descricao'
-          >
+        >
         </Marker>
       </MapView>
     </View>
