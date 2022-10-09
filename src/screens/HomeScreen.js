@@ -1,5 +1,5 @@
-import React, { useContext, useState, useCallback} from "react";
-import { View, TouchableOpacity, Modal, Text, StatusBar} from "react-native";
+import React, { useContext, useState, useCallback, useRef } from "react";
+import { View, TouchableOpacity, Modal, Text, StatusBar, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from "../context/AuthContext";
@@ -30,6 +30,8 @@ export default function HomeScreen({ navigation }) {
 
     const [isVisible, setIsVisible] = useState(false);
 
+    const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
+
     const bottomSheetRef = useRef(null);
 
 
@@ -40,6 +42,13 @@ export default function HomeScreen({ navigation }) {
     const getModalReportView = useCallback((openModalReportView) => {
         setIsVisible(openModalReportView);
     }, [])
+
+    const handleClosePress = useCallback(() => {
+        bottomSheetRef.current?.close();
+        setTimeout(() => {
+            setIsBottomSheetVisible(false)
+        }, 500)
+      }, []);
 
     const openNotificationModal = async (location) => {
 
@@ -77,8 +86,9 @@ export default function HomeScreen({ navigation }) {
                     <MaterialIcons name="menu" size={24} color="black" />
                 </TouchableOpacity>
             </View>
-            <Map userLocation={getUserLocation} modalReportView={getModalReportView} />
-            <View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%' }}>
+            <Map userLocation={getUserLocation} modalReportView={getModalReportView} style={{ zIndex: -1 }} />
+
+            {!isBottomSheetVisible && (<View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%' }}>
                 <TouchableOpacity
                     visible={visibleButton}
                     onPress={() => openNotificationModal(location)}
@@ -100,13 +110,16 @@ export default function HomeScreen({ navigation }) {
                 {isVisible && (
                     <ActionModalViewReport
                         address={address}
-                        handleClose={() => setIsVisible(false)}
-                        handleNavigation={() => { bottomSheetRef.current?.expand(); setIsVisible(false) }} />
+                        handleClose={() => { setIsVisible(false); setIsBottomSheetVisible(false) }}
+                        handleNavigation={() => { bottomSheetRef.current?.expand(); setIsVisible(false); setIsBottomSheetVisible(true) }} />
                 )}
-            {/* <BottomSheet ref={bottomSheetRef} index={1} snapPoints={[1, height -280]} backgroundStyle={{ backgroundColor: 'white' }} handleIndicatorStyle={{ backgroundColor: '#555' }}>
-                <ReportView />
-            </BottomSheet> */}
-            </View>
+            </View>)}
+            {isBottomSheetVisible && (<View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%', height:'100%' }}>
+                <TouchableOpacity style={{height: '100%', width: '100%'}}onPress={() => handleClosePress()}></TouchableOpacity>
+                <BottomSheet ref={bottomSheetRef} index={1} snapPoints={[1, height - 280]} backgroundStyle={{ backgroundColor: 'white' }} handleIndicatorStyle={{ backgroundColor: '#555' }}>
+                    <ReportView />
+                </BottomSheet>
+            </View>)}
         </View>
     )
 }
