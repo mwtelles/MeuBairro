@@ -106,12 +106,19 @@ const Map = ({ userLocation, modalReportView }) => {
           }}
           onPress={(data) => openModalReportView(data)}
         >
-          <Callout>
-            <View style={{ flexDirection: 'row'}}>
-              <Entypo name="back-in-time" size={12} color="black" />
-              <Text>Buraco</Text>
+          <>
+            <View>
+              <FontAwesome name="map-marker" size={25} color="green" />
             </View>
-          </Callout>
+
+            <Callout style={{position:'absolute', backgroundColor:'red', width:'100%'}}>
+              <View style={{ flexDirection: 'row' }}>
+                <Entypo name="back-in-time" size={12} color="black" />
+                <Text>Buraco</Text>
+              </View>
+            </Callout>
+          </>
+
         </Marker>
       </MapView>
     </View>
