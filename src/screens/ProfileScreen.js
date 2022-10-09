@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, Button, ActivityIndicator } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -53,7 +53,7 @@ const ProfileScreen = ({ navigation }) => {
         getDownloadURL(upload.snapshot.ref).then(async (downloadURL) => {
           setAvatar(downloadURL);
           const data = await updateUserImage(userId, downloadURL);
-          if(data.success) {
+          if (data.success) {
             setLoading(false);
             alert(data.result.message);
           }
@@ -76,17 +76,17 @@ const ProfileScreen = ({ navigation }) => {
             <View style={[styles.card, styles.shadowProp]}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row' }}>
-                {loading ? (
-                  <Image
-                  source={require('../assets/images/illustrations/user-profile.jpg')}
-                  style={{ width: 100, height: 100, borderRadius: 100 }} />
-                ) : (
-                  <Image
-                    source={avatar ? {uri: avatar}  : userInfo ? {uri: userInfo.result.user.photo_url} : require('../assets/images/illustrations/user-profile.jpg')}
-                    style={{ width: 100, height: 100, borderRadius: 100 }} />
-                )}
+                  {loading ? (
+                    <View style={{ backgroundColor:'rgba(0,0,0,0.08)', width:100, height:100, borderRadius:100, alignItems:'center', justifyContent:'center'}}>
+                      <ActivityIndicator size={'large'} />
+                    </View>
+                  ) : (
+                    <Image
+                      source={avatar ? { uri: avatar } : userInfo ? { uri: userInfo.result.user.photo_url } : require('../assets/images/illustrations/user-profile.jpg')}
+                      style={{ width: 100, height: 100, borderRadius: 100 }} />
+                  )}
                   <TouchableOpacity style={styles.uploadButton} onPress={() => handleUpload(userInfo.result.user.id)}>
-                    <MaterialIcons name='camera' size={20} color="white" />
+                    <MaterialIcons name='file-upload' size={20} color="white" />
                   </TouchableOpacity>
                   <View style={{ flexDirection: 'column', paddingLeft: 10, paddingTop: 10 }}>
                     <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Inter-Medium', fontWeight: '700' }}>{userInfo.result.user.name}</Text>
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    left: 35,
+    left: '19%',
     bottom: -10,
 
   }
