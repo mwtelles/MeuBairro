@@ -1,14 +1,20 @@
-import React, { useContext, useState, useCallback } from "react";
-import { View, TouchableOpacity, Modal, Text, StatusBar } from "react-native";
+import React, { useContext, useState, useCallback, useRef } from "react";
+import { View, TouchableOpacity, Modal, Text, StatusBar, Dimensions } from "react-native";
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from "../context/AuthContext";
 import Map from "../components/Map";
 import { ActionModal } from "../components/ActionModal";
 import { ActionModalViewReport } from "../components/ActionModalViewReport";
+import ReportView from "../components/ReportView";
 import { api } from '../services/api';
 
+import BottomSheet from '@gorhom/bottom-sheet';
+
+
 export default function HomeScreen({ navigation }) {
+
+    const { width, height } = Dimensions.get('screen')
 
     const { userInfo } = useContext(AuthContext);
 
@@ -23,6 +29,8 @@ export default function HomeScreen({ navigation }) {
     const [visibleButton, setVisibleButton] = useState(false);
 
     const [isVisible, setIsVisible] = useState(false);
+
+    const bottomSheetRef = useRef(null);
 
 
     const getUserLocation = useCallback((location) => {
@@ -93,9 +101,11 @@ export default function HomeScreen({ navigation }) {
                     <ActionModalViewReport
                         address={address}
                         handleClose={() => setIsVisible(false)}
-                        handleNavigation={() => { navigation.navigate('Relatar Problema'); setIsVisible(false) }} />
+                        handleNavigation={() => { bottomSheetRef.current?.expand(); setIsVisible(false) }} />
                 )}
-
+            {/* <BottomSheet ref={bottomSheetRef} index={1} snapPoints={[1, height -280]} backgroundStyle={{ backgroundColor: 'white' }} handleIndicatorStyle={{ backgroundColor: '#555' }}>
+                <ReportView />
+            </BottomSheet> */}
             </View>
         </View>
     )
