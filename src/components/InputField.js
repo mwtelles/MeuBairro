@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function InputField ({label,icon,inputType,keyboardType, fieldButtonLabel, fieldButtonFunction, value, onChangeText}) {
   return (
-    <View style={{ flexDirection: 'row', borderColor: '#ccc', borderWidth: 0.8, padding: 12, marginBottom: 25, alignItems: 'center', borderRadius: 8 }}>
+    <View style={{ flexDirection: 'row', backgroundColor: 'rgba(0,0,0,0.05)', padding: 15, borderRadius: 8, marginBottom: 20 }}>
           {icon}
           {inputType == 'password' ? ( 
           <TextInput 
