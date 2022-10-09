@@ -1,5 +1,5 @@
-import React, { useContext, useState, useCallback} from "react";
-import { View, TouchableOpacity, Modal, Text, StatusBar} from "react-native";
+import React, { useContext, useState, useCallback, useRef} from "react";
+import { View, TouchableOpacity, Modal, Text, StatusBar, Dimensions} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from "../context/AuthContext";
