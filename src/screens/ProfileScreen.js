@@ -27,10 +27,10 @@ const ProfileScreen = ({ navigation }) => {
 
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.onload = function() {
+      xhr.onload = function () {
         resolve(xhr.response);
       };
-      xhr.onerror = function() {
+      xhr.onerror = function () {
         reject(new TypeError('Network request failed'));
       };
       xhr.responseType = 'blob';
@@ -66,10 +66,7 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <ScrollView style={{ height: '100%' }}>
       <View style={{ flex: 1, height: '100%' }}>
-        <LinearGradient
-          colors={['#53E88B', '#15BE77', '#15BE77']}
-          style={{ paddingVertical: 60 }}
-        >
+        <LinearGradient colors={['#53E88B', '#15BE77', '#15BE77']} style={{ paddingVertical: 60 }}>
           <View style={{ backgroundColor: '#53E88B', width: '15%', padding: 14, marginLeft: 20, borderRadius: 10, opacity: 0.8 }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <MaterialCommunityIcons name="chevron-left" size={30} color="white" />
@@ -105,38 +102,38 @@ const ProfileScreen = ({ navigation }) => {
             </View>
           </View>
         </LinearGradient>
-      </View>
-      <View style={{ marginTop: '10%', height: '100%' }}>
-        <TouchableOpacity onPress={() => { }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <View style={[styles.infoCard, styles.shadowProp]}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image
-                    source={require('../assets/images/illustrations/user-profile.jpg')}
-                    style={{ width: 60, height: 60, borderRadius: 8 }} />
-                  <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium', paddingLeft: 10 }}>Publicações</Text>
+        <View style={{ marginTop: '10%' }}>
+          <TouchableOpacity onPress={() => { }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <View style={[styles.infoCard, styles.shadowProp]}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image
+                      source={require('../assets/images/illustrations/user-profile.jpg')}
+                      style={{ width: 60, height: 60, borderRadius: 8 }} />
+                    <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium', paddingLeft: 10 }}>Publicações</Text>
+                  </View>
+                  <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium' }}>4</Text>
                 </View>
-                <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium' }}>4</Text>
               </View>
             </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <View style={[styles.infoCard, styles.shadowProp]}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image
-                    source={require('../assets/images/illustrations/user-profile.jpg')}
-                    style={{ width: 60, height: 60, borderRadius: 8 }} />
-                  <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium', paddingLeft: 10 }}>Relatórios</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <View style={[styles.infoCard, styles.shadowProp]}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image
+                      source={require('../assets/images/illustrations/user-profile.jpg')}
+                      style={{ width: 60, height: 60, borderRadius: 8 }} />
+                    <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium', paddingLeft: 10 }}>Relatórios</Text>
+                  </View>
+                  <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium' }}>4</Text>
                 </View>
-                <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Roboto-Medium' }}>4</Text>
               </View>
             </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   )
@@ -156,7 +153,7 @@ const styles = StyleSheet.create({
     width: '90%',
     padding: 15,
     borderRadius: 8,
-    elevation: 20,
+    elevation: 5,
     shadowColor: '#52006A',
     marginTop: 10,
     marginBottom: 10

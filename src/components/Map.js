@@ -1,17 +1,19 @@
-import { View, Dimensions } from 'react-native'
+import { View, Dimensions, Text } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import MapView from 'react-native-maps';
+import MapView, { Callout } from 'react-native-maps';
 
 
 import { FontAwesome } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 import * as Location from 'expo-location';
 
 import { Circle, Marker } from 'react-native-maps';
+import { ActionModalViewReport } from './ActionModalViewReport';
 
 const { width, height } = Dimensions.get('screen')
 
-const Map = ({ userLocation }) => {
+const Map = ({ userLocation, modalReportView }) => {
 
   const [userFirstLocation, setUserFirstLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
@@ -22,6 +24,14 @@ const Map = ({ userLocation }) => {
     latitude: -22.4070467,
     longitude: -43.66119,
   });
+
+
+
+  function openModalReportView(data) {
+    if (data) {
+      modalReportView(true);
+    }
+  }
 
   useEffect(() => {
     getLocationPermission()
@@ -39,8 +49,6 @@ const Map = ({ userLocation }) => {
   }
 
   function getUserLocation(location) {
-
-
     if (location) {
       const { latitude, longitude } = location;
       setUserFirstLocation(location);
@@ -77,7 +85,6 @@ const Map = ({ userLocation }) => {
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
-
         onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
         loadingEnabled={true}
         showsBuildings={false}
@@ -95,11 +102,16 @@ const Map = ({ userLocation }) => {
         <Marker
           coordinate={{
             latitude: -22.4070233,
-            longitude: -43.6610083
+            longitude: -43.6620083,
           }}
-          title='teste'
-          description='descricao'
+          onPress={(data) => openModalReportView(data)}
         >
+          <Callout>
+            <View style={{ flexDirection: 'row'}}>
+              <Entypo name="back-in-time" size={12} color="black" />
+              <Text>Buraco</Text>
+            </View>
+          </Callout>
         </Marker>
       </MapView>
     </View>

@@ -3,8 +3,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 import ReportsScreen from '../screens/ReportsScreen';
+import RankingScreen from '../screens/RankingScreen';
 import CustomDrawer from '../components/CustomDrawer';
 
 import { AntDesign } from '@expo/vector-icons'; 
@@ -36,9 +36,9 @@ const AppStack = () => {
                 <AntDesign name="notification" size={22} color={color} />
             )
             }}/>
-            <Drawer.Screen component={SettingsScreen} name="Definições" 
+            <Drawer.Screen component={RankingScreen} name="Ranking" 
             options={{drawerIcon: ({color}) => (
-                <AntDesign name="setting" size={22} color={color} />
+                <AntDesign name="Trophy" size={22} color={color} />
             )
             }}/>
         </Drawer.Navigator>
