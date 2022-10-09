@@ -12,22 +12,21 @@ export const AuthProvider = ({ children }) => {
     const [userToken, setUserToken] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
 
-    const login = (email, password) => {
+    const login = async (email, password) => {
         setIsLoading(true);
-        axios.post(`${BASE_URL}/login`, {
+        await axios.post(`${BASE_URL}/login`, {
             login: email,
             password
         })
-        .then(res => {
+        .then( async (res) => {
             let userInfo = res.data;
             setUserInfo(userInfo);
             setUserToken(userInfo.result.token);
 
-            AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-            AsyncStorage.setItem('userToken', userInfo.result.token);
+            await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+            await AsyncStorage.setItem('userToken', userInfo.result.token);
+            await AsyncStorage.setItem('userEmail', userInfo.result.user.email);
             
-            console.log(userInfo);
-            console.log('User Token ' + userInfo.result.token);
         })
         .catch(e => {
             console.log(`Login error ${e}`);
