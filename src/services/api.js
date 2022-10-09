@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const api = axios.create({
   baseURL: "https://trueway-geocoding.p.rapidapi.com",
@@ -7,3 +8,28 @@ export const api = axios.create({
     'X-RapidAPI-Host': 'trueway-geocoding.p.rapidapi.com'
   },
 });
+
+const apiFront = axios.create({
+  baseURL: "https://tcc-meu-bairro.herokuapp.com",
+});
+
+
+export const updateUserImage = async (userId, image) => {
+  try {
+    const token = await AsyncStorage.getItem('userToken');
+    const email = await AsyncStorage.getItem('userEmail');
+    const response = await apiFront.put(`/app/update-user/${userId}`, {
+      photo_url: image,
+    }, {
+      headers: {
+        'token': token,
+        'email': email,
+        'session': '',
+      }
+    })
+    return response.data;
+
+  } catch (e) {
+    console.log(e);
+  }
+};

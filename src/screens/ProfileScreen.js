@@ -5,34 +5,19 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { AuthContext } from '../context/AuthContext';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-// import { storage } from '../services/firebase';
 import * as ImagePicker from 'expo-image-picker';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage } from '../services/firebase';
-import { launchImageLibrary } from 'react-native-image-picker';
-
-const options = {
-  title: 'Select Avatar',
-  type: 'library',
-  options: {
-    maxHeight: 200,
-    maxWidth: 200,
-    selectionLimit: 1,
-    mediaType: 'photo',
-    includeBase64: true,
-  }
-}
+import { updateUserImage } from '../services/api';
 
 const ProfileScreen = ({ navigation }) => {
 
   const { userInfo } = useContext(AuthContext);
 
   const [avatar, setAvatar] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-
-  const handleUpload = async () => {
-    // const result = await launchImageLibrary(options);
+  const handleUpload = async (userId) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -55,7 +40,7 @@ const ProfileScreen = ({ navigation }) => {
 
 
     if (!result.cancelled) {
-      setAvatar(result.uri);
+      setLoading(true);
 
       const storageRef = ref(storage, `images/${blob['_data'].blobId}`);
 
@@ -63,10 +48,15 @@ const ProfileScreen = ({ navigation }) => {
       upload.on('state_changed', (snapshot) => {
         console.log('passei por aqui', snapshot.bytesTransferred, snapshot.totalBytes);
       }, error => {
-        console.log('cheguei aqui', error);
+        console.log(error);
       }, () => {
-        getDownloadURL(upload.snapshot.ref).then((downloadURL) => {
+        getDownloadURL(upload.snapshot.ref).then(async (downloadURL) => {
           setAvatar(downloadURL);
+          const data = await updateUserImage(userId, downloadURL);
+          if(data.success) {
+            setLoading(false);
+            alert(data.result.message);
+          }
         })
       });
       // const upload = storageRef.put(result.uri)
@@ -89,10 +79,16 @@ const ProfileScreen = ({ navigation }) => {
             <View style={[styles.card, styles.shadowProp]}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row' }}>
+                {loading ? (
                   <Image
-                    source={avatar ? {uri: avatar}  : require('../assets/images/illustrations/user-profile.jpg')}
+                  source={require('../assets/images/illustrations/user-profile.jpg')}
+                  style={{ width: 100, height: 100, borderRadius: 100 }} />
+                ) : (
+                  <Image
+                    source={avatar ? {uri: avatar}  : userInfo ? {uri: userInfo.result.user.photo_url} : require('../assets/images/illustrations/user-profile.jpg')}
                     style={{ width: 100, height: 100, borderRadius: 100 }} />
-                  <TouchableOpacity style={styles.uploadButton} onPress={() => handleUpload()}>
+                )}
+                  <TouchableOpacity style={styles.uploadButton} onPress={() => handleUpload(userInfo.result.user.id)}>
                     <MaterialIcons name='camera' size={20} color="white" />
                   </TouchableOpacity>
                   <View style={{ flexDirection: 'column', paddingLeft: 10, paddingTop: 10 }}>
