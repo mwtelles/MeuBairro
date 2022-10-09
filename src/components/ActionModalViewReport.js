@@ -50,7 +50,7 @@ export function ActionModalViewReport({ handleClose, handleNavigation, address }
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                 <CustomButton label={'Visualizar Relato'} onPress={handleNavigation} />
                 <TouchableOpacity>
-                <Text style={{backgroundColor: 'rgba(0,0,0,0.05)', padding:20, borderRadius:8, fontSize:18}}>✅</Text>
+                <Text style={{backgroundColor: 'rgba(0,0,0,0.05)', padding:20, borderRadius:8, fontSize:18}}>✔️</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{}}>
                 <Text style={{backgroundColor: 'rgba(0,0,0,0.05)', padding:20, borderRadius:8, fontSize:18}}>👍</Text>
