@@ -33,6 +33,8 @@ export default function HomeScreen({ navigation }) {
     const [isVisible, setIsVisible] = useState(false);
 
     const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
+    
+    const [openRelate, setOpenRelate] = useState([]);
 
     const bottomSheetRef = useRef(null);
 
@@ -42,7 +44,8 @@ export default function HomeScreen({ navigation }) {
     }, [])
 
     const getModalReportView = useCallback((openModalReportView) => {
-        setIsVisible(openModalReportView);
+        setIsVisible(true);
+        openNotificationModal(openModalReportView, true);
     }, [])
 
     const handleClosePress = useCallback(() => {
@@ -52,14 +55,18 @@ export default function HomeScreen({ navigation }) {
         }, 500)
       }, []);
 
-    const openNotificationModal = async (location) => {
+    const openNotificationModal = async (location, openRelate) => {
 
         try {
             const response = await api.get('/ReverseGeocode', { params: { location: `${location[0]}, ${location[1]}` } });
             const data = response.data.results;
             let address = data.find((item) => item.location_type === 'centroid' && item.type === 'route');
-            setAddress(address);
-            setVisibleModal(true)
+            if(!openRelate) {
+                setVisibleModal(true)
+                setAddress(address);
+            } else {
+                setOpenRelate(address);
+            }
         } catch (err) {
 
             console.log(err);
@@ -93,7 +100,7 @@ export default function HomeScreen({ navigation }) {
             {!isBottomSheetVisible && (<View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%' }}>
                 <TouchableOpacity
                     visible={visibleButton}
-                    onPress={() => openNotificationModal(location)}
+                    onPress={() => openNotificationModal(location, false)}
                     style={{ backgroundColor: '#53E88B', borderRadius: 12, padding: 18, marginRight: 15, marginBottom: 25 }}>
                     <MaterialIcons name="add" size={32} color="white" />
                 </TouchableOpacity>
@@ -111,7 +118,7 @@ export default function HomeScreen({ navigation }) {
                 </Modal>
                 {isVisible && (
                     <ActionModalViewReport
-                        address={address}
+                        address={openRelate}
                         handleClose={() => { setIsVisible(false); setIsBottomSheetVisible(false) }}
                         handleNavigation={() => { bottomSheetRef.current?.expand(); setIsVisible(false); setIsBottomSheetVisible(true) }} />
                 )}

@@ -1,6 +1,7 @@
 import { View, Dimensions, Text } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import MapView, { Callout } from 'react-native-maps';
+import { getAllNotifications } from '../services/api';
 
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -17,26 +18,32 @@ const Map = ({ userLocation, modalReportView }) => {
 
   const [userFirstLocation, setUserFirstLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
+  const [notifications, setNotifications] = useState([]);
 
   const [region, setRegion] = useState(null);
 
-  const [pin, setPin] = React.useState({
+  const [pin, setPin] = useState({
     latitude: -22.4070467,
     longitude: -43.66119,
   });
 
 
-
   function openModalReportView(data) {
     if (data) {
-      modalReportView(true);
+      modalReportView(data);
     }
   }
 
   useEffect(() => {
     getLocationPermission()
     getUserLocation()
+    getNotifications()
   }, [])
+
+  const getNotifications = async () => {
+    const response = await getAllNotifications();
+    setNotifications(response);
+  }
 
   function getLocationPermission() {
     (async () => {
@@ -85,7 +92,7 @@ const Map = ({ userLocation, modalReportView }) => {
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
-        onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
+        // onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
         loadingEnabled={true}
         showsBuildings={false}
         showsTraffic={false}
@@ -99,27 +106,32 @@ const Map = ({ userLocation, modalReportView }) => {
           longitudeDelta: 0.0421,
         }}
       >
-        <Marker
-          coordinate={{
-            latitude: -22.4070233,
-            longitude: -43.6620083,
-          }}
-          onPress={(data) => openModalReportView(data)}
-        >
-          <>
-            <View>
-              <FontAwesome name="map-marker" size={25} color="green" />
-            </View>
+        {notifications.map((notification, index) => {
+          return (
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: notification.latitude,
+                longitude: notification.longitude,
+              }}
+              onPress={(data) => openModalReportView([notification.latitude, notification.longitude])}
+            >
+              <>
+                <View>
+                  <FontAwesome name="map-marker" size={45} color="green" />
+                </View>
 
-            <Callout style={{position:'absolute', backgroundColor:'red', width:'100%'}}>
-              <View style={{ flexDirection: 'row' }}>
-                <Entypo name="back-in-time" size={12} color="black" />
-                <Text>Buraco</Text>
-              </View>
-            </Callout>
-          </>
+                <Callout style={{ position: 'absolute', backgroundColor: 'red', width: '100%' }}>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Entypo name="back-in-time" size={12} color="black" />
+                    <Text>Buraco</Text>
+                  </View>
+                </Callout>
+              </>
 
-        </Marker>
+            </Marker>
+          )
+        })}
       </MapView>
     </View>
   )
