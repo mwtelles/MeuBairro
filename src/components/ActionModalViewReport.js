@@ -36,7 +36,7 @@ export function ActionModalViewReport({ handleClose, handleNavigation, address }
                         <Ionicons name="location-outline" size={24} color="black" />
                     </View>
                     <View style={{ flexDirection: 'column', paddingLeft: 10, paddingRight: 80 }}>
-                        <Text style={{ color: '#000000', fontSize: 14, fontFamily: 'Inter-Medium', fontWeight: '700' }}>{`${address.street}, ${address.house} ${address.sublocality} - ${address.area}/${address.region}`}</Text>
+                        <Text style={{ color: '#000000', fontSize: 14, fontFamily: 'Inter-Medium', fontWeight: '700' }}>{`${address.street}, ${address.sublocality} - ${address.area}/${address.region}`}</Text>
                         <View style={{flexDirection:'row', paddingVertical:3}}>
                             <Text>📅</Text>
                             <Text style={{paddingLeft:5, fontSize:14}}>Relatado há 7 dias</Text>

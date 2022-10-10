@@ -33,3 +33,24 @@ export const updateUserImage = async (userId, image) => {
     console.log(e);
   }
 };
+
+export const getAllNotifications = async () => {
+
+  try {
+
+    const token = await AsyncStorage.getItem('userToken');
+    const email = await AsyncStorage.getItem('userEmail');
+    const response = await apiFront.get('/app/notifications', {
+      headers: {
+        'token': token,
+        'email': email,
+        'session': '',
+      }
+    })
+    return response.data.result.notifications;
+
+  }catch (e) {
+    console.log(e);
+  }
+
+};
