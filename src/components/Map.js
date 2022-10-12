@@ -1,9 +1,9 @@
-import { View, Dimensions, Text } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Dimensions, Text, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
 import MapView, { Callout } from 'react-native-maps';
 import { getAllNotifications } from '../services/api';
 
-
+import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
@@ -27,6 +27,7 @@ const Map = ({ userLocation, modalReportView }) => {
     longitude: -43.66119,
   });
 
+  // const mapRef = useRef(null);
 
   function openModalReportView(data) {
     if (data) {
@@ -69,6 +70,8 @@ const Map = ({ userLocation, modalReportView }) => {
             longitudeDelta: 0.0421,
           })
           userLocation(location);
+          // console.log('location', location)
+          // mapRef.current.animateToRegion(location, 3 * 1000);
         })();
       }
     }
@@ -81,18 +84,19 @@ const Map = ({ userLocation, modalReportView }) => {
       marginTop: '-18%',
     }}>
       <MapView
+        // ref={mapRef}
         style={{
           width: width,
           height: height,
         }}
         mapType='standard'
-        showsMyLocationButton={true}
+        showsMyLocationButton={false}
         minZoomLevel={16}
         maxZoomLevel={19}
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
-        // onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
+        onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
         loadingEnabled={true}
         showsBuildings={false}
         showsTraffic={false}
@@ -133,6 +137,7 @@ const Map = ({ userLocation, modalReportView }) => {
           )
         })}
       </MapView>
+      
     </View>
   )
 }

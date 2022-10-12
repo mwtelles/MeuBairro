@@ -1,62 +1,69 @@
 import { View, Text, ScrollView, Image } from 'react-native'
 import React from 'react'
 
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+
 import { Entypo } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import FlatListHorizontal from './FlatListHorizontal';
+
+import CustomButton from './CustomButton';
 
 const ReportView = () => {
+
+    const data = [ 
+        '../assets/images/illustrations/user-profile.jpg',
+        '../assets/images/illustrations/login.jpg',
+        '../assets/images/illustrations/first_screen.jpg',
+    ]
+
+
     return (
         <ScrollView>
             <View style={{ flex: 1, paddingHorizontal: 20 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text>
-                        Pavimentação
-                    </Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                        <Entypo name="location-pin" size={24} color="black" />
-                        <Text>
-                            👍
-                        </Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 15 }}>
+                    <View style={{ backgroundColor: 'rgba(83, 232, 139, 0.6)', borderRadius: 100, marginBottom:12, marginTop:2, paddingVertical:5, paddingHorizontal:10 }}>
+                        <Text style={{ fontSize: 14, color: 'black', fontFamily: 'Inter-Medium' }}>Pavimentação</Text>
                     </View>
-                </View>
-                <View>
-                    <Text style={{ fontSize: 16, color: 'black' }}>
-                        Buraco na rua
-                    </Text>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Entypo name="location-pin" size={24} color="black" />
-                        <Text>R.José O Cura 80-234, Centro</Text>
-                    </View>
-                    <Text>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit, urna consequat felis vehicula class ultricies mollis dictumst, aenean non a in donec nulla. Phasellus ante pellentesque erat cum risus consequat imperdiet.
-                    </Text>
-                </View>
-                <View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text>
-                            Imagens
-                        </Text>
-                        <Text>
-                            Ver todos
-                        </Text>
-                    </View>
-                    <Text>GALERIA</Text>
-                </View>
-                <View>
-                    <Text style={{ fontSize: 16, color: 'black' }}>
-                        Comentários
-                    </Text>
-                    <View style={{flexDirection:'row'}}>
-                        <Image
-                            source={require('../assets/images/illustrations/user-profile.jpg')}
-                            style={{ width: 100, height: 100, borderRadius: 0 }} />
-                        <View>
-                            <Text>Carlos Alberto</Text>
-                            <Text>Mancusi</Text>
-                            <Text>09 de Outubro</Text>
-                            <Text>Estamos cientes do ocorrido...</Text>
+                    <View style={{}}>
+                        <View style={{flexDirection: 'row', padding: 5, borderRadius: 100}}>
+                            <Image source={require('../assets/images/examples/1.jpg')} style={{ width: 30, height: 30, borderRadius: 100, borderWidth:1, borderColor:'white', zIndex:3 }} />
+                            <Image source={require('../assets/images/examples/2.jpg')} style={{ width: 30, height: 30, borderRadius: 100, marginLeft:-10, borderWidth:1, borderColor:'white', zIndex:2 }} />
+                            <Image source={require('../assets/images/examples/3.png')} style={{ width: 30, height: 30, borderRadius: 100, marginLeft:-12, borderWidth:1, borderColor:'white', zIndex:1 }} />
+                            <View>
+                                <Text style={{ fontFamily:'Inter-Bold',fontSize:10, padding: 2, borderRadius:50, marginLeft:-16, marginTop:-12, zIndex:4}}>+10</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
+                <View>
+                    <Text style={{ fontSize: 24, color: 'black', fontFamily: 'Inter-Black', marginTop: 10, marginBottom: 10 }}>
+                        Buraco na rua
+                    </Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 14, color: 'gray', fontFamily: 'Inter-Medium', marginTop: 10, marginBottom: 10 }}>R.José O Cura 80-234, Centro</Text>
+                    </View>
+                    <View style={{ maxWidth: '95%' }}>
+                        <Text style={{ textAlign: 'justify', fontFamily: 'Roboto-Regular', fontSize: 13, lineHeight: 19 }}>
+                            Lorem ipsum dolor sit amet consectetur adipiscing elit, urna consequat felis vehicula class ultricies mollis dictumst, aenean non a in donec nulla. Phasellus ante pellentesque erat cum risus consequat imperdiet.
+                        </Text>
+                    </View>
+                </View>
+                <View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontSize: 14, color: 'black', fontFamily: 'Inter-Bold', marginTop: 10, marginBottom: 10 }}>
+                            Imagens
+                        </Text>
+                    </View>
+                    <View>
+                        <FlatListHorizontal data={data}/>
+                    </View>
+                    <View style={{marginTop:30}}>
+                        <CustomButton label={'Ver Relato Completo'}/>
+                    </View>
+                </View>
+                
             </View>
         </ScrollView>
     )

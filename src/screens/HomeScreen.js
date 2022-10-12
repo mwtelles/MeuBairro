@@ -3,6 +3,7 @@ import React, { useContext, useState, useCallback, useRef} from "react";
 import { View, TouchableOpacity, Modal, Text, StatusBar, Dimensions} from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext } from "../context/AuthContext";
 import Map from "../components/Map";
@@ -19,11 +20,6 @@ export default function HomeScreen({ navigation }) {
     const { width, height } = Dimensions.get('screen')
 
     const { userInfo } = useContext(AuthContext);
-
-    // const [pin, setPin] = React.useState({
-    //     latitude: null,
-    //     longitude: null,
-    //   });
 
     const [location, setLocation] = useState([]);
     const [address, setAddress] = useState([]);
@@ -123,7 +119,7 @@ export default function HomeScreen({ navigation }) {
                         handleNavigation={() => { bottomSheetRef.current?.expand(); setIsVisible(false); setIsBottomSheetVisible(true) }} />
                 )}
             </View>)}
-            {isBottomSheetVisible && (<View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%', height:'100%' }}>
+            {isBottomSheetVisible && (<View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%', height:'100%', backgroundColor:'rgba(0,0,0,0.111)'}}>
                 <TouchableOpacity style={{height: '100%', width: '100%'}}onPress={() => handleClosePress()}></TouchableOpacity>
                 <BottomSheet ref={bottomSheetRef} index={1} snapPoints={[1, height - 280]} backgroundStyle={{ backgroundColor: 'white' }} handleIndicatorStyle={{ backgroundColor: '#555' }}>
                     <ReportView />

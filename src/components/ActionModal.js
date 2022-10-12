@@ -3,12 +3,12 @@ import React from 'react'
 import CustomButton from './CustomButton'
 
 import { Ionicons } from '@expo/vector-icons';
+import StackNav from '../navigation/StackNav';
 
 export function ActionModal({ handleClose, handleNavigation, address }) {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <TouchableOpacity style={{ flex: 1, zIndex: 9 }} onPress={handleClose}></TouchableOpacity>
-
             <View style={{
                 flex: 0,
                 marginVertical: 20,
