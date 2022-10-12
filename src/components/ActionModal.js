@@ -3,7 +3,6 @@ import React from 'react'
 import CustomButton from './CustomButton'
 
 import { Ionicons } from '@expo/vector-icons';
-import StackNav from '../navigation/StackNav';
 
 export function ActionModal({ handleClose, handleNavigation, address }) {
     return (

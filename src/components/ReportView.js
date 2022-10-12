@@ -1,21 +1,16 @@
 import { View, Text, ScrollView, Image } from 'react-native'
 import React from 'react'
 
-import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
-
-import { Entypo } from '@expo/vector-icons';
-import { EvilIcons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import FlatListHorizontal from './FlatListHorizontal';
 
 import CustomButton from './CustomButton';
 
-const ReportView = () => {
+const ReportView = ({ navigation }) => {
 
     const data = [ 
-        '../assets/images/illustrations/user-profile.jpg',
-        '../assets/images/illustrations/login.jpg',
-        '../assets/images/illustrations/first_screen.jpg',
+        {url: require('../assets/images/illustrations/user-profile.jpg')},
+        {url: require('../assets/images/illustrations/login.jpg')},
+        {url: require('../assets/images/illustrations/first_screen.jpg')},
     ]
 
 
@@ -60,7 +55,7 @@ const ReportView = () => {
                         <FlatListHorizontal data={data}/>
                     </View>
                     <View style={{marginTop:30}}>
-                        <CustomButton label={'Ver Relato Completo'}/>
+                        <CustomButton label={'Ver Relato Completo'} onPress={() => navigation.navigate('FullReport')}/>
                     </View>
                 </View>
                 

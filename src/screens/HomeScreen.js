@@ -119,7 +119,7 @@ export default function HomeScreen({ navigation }) {
                         handleNavigation={() => { bottomSheetRef.current?.expand(); setIsVisible(false); setIsBottomSheetVisible(true) }} />
                 )}
             </View>)}
-            {isBottomSheetVisible && (<View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%', height:'100%', backgroundColor:'rgba(0,0,0,0.111)'}}>
+            {isBottomSheetVisible && (<View style={{ flexDirection: 'row-reverse', zIndex: 2, marginBottom: 35, maxWidth: '100%', height:'100%'}}>
                 <TouchableOpacity style={{height: '100%', width: '100%'}}onPress={() => handleClosePress()}></TouchableOpacity>
                 <BottomSheet ref={bottomSheetRef} index={1} snapPoints={[1, height - 280]} backgroundStyle={{ backgroundColor: 'white' }} handleIndicatorStyle={{ backgroundColor: '#555' }}>
                     <ReportView />

@@ -24,11 +24,11 @@ const FlatListHorizontal = ({ data }) => {
                         height: width / 2.6,
                         width: width * 0.45 - 10,
                         marginHorizontal: 10,
-                        borderRadius: 8,
+                        borderRadius: 12,
                         marginLeft: 0
                     }}
                 >
-                    <Image source={item} style={{ width: '100%', height: '100%', resizeMode: 'contain', borderRadius: 10 }} />
+                    <Image source={item.url} style={{ width: '100%', height: '100%', resizeMode: 'contain', borderRadius: 10 }} />
                     {/* <Image source={require('../assets/images/examples/1.jpg')} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 10 }} /> */}
                 </View>}
         />
