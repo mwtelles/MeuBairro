@@ -7,12 +7,11 @@ import {
 } from "react-native";
 import React from "react";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { TextInput } from "react-native-gesture-handler";
-import CustomButton from "../components/CustomButton";
+import Fotolib from "../assets/icons/Fotolib";
 
-import fotolib from "../assets/icons/fotolib";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import CustomButton from "../components/CustomButton";
+import Camera from "../assets/icons/Camera";
 
 const SelectPictureScreen = ({ navigation }) => {
   return (
@@ -66,15 +65,15 @@ const SelectPictureScreen = ({ navigation }) => {
                 marginVertical: 10,
               }}
             >
-              <Image
-                source={require("../assets/images/examples/1.jpg")}
-                style={{ width: 80, height: 80, marginBottom: 10 }}
-              />
+              <Fotolib />
+
+              
               <Text
                 style={{
                   fontSize: 16,
                   fontWeight: "500",
                   fontFamily: "Inter-Bold",
+                  marginTop: 15,
                 }}
               >
                 Biblioteca de Fotos
@@ -93,15 +92,13 @@ const SelectPictureScreen = ({ navigation }) => {
                 marginVertical: 10,
               }}
             >
-              <Image
-                source={require("../assets/images/examples/1.jpg")}
-                style={{ width: 80, height: 80, marginBottom: 10 }}
-              />
+              <Camera />
               <Text
                 style={{
                   fontSize: 16,
                   fontWeight: "500",
                   fontFamily: "Inter-Bold",
+                  marginTop: 15,
                 }}
               >
                 Camera
