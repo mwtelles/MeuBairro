@@ -25,9 +25,9 @@ const CustomDrawer = (props) => {
                     style={{ padding: 20 }}
                 >
                     <Image
-                        source={require('../assets/images/illustrations/user-profile.jpg')}
-                        style={{ width: 90, height: 90, borderRadius: 18, marginBottom: 20 }} />
-                    <Text style={{ color: '#fff', fontSize: 18, fontFamily: 'Roboto-Medium' }}>{userInfo.result.user.name}</Text>
+                        source={require('../assets/images/examples/1.jpg')}
+                        style={{ width: 90, height: 90, borderRadius: 18, marginBottom: 20, resizeMode:'cover' }} />
+                    <Text style={{ color: '#fff', fontSize: 18, fontFamily: 'Inter-Bold' }}>{userInfo.result.user.name}</Text>
                     <View style={{ flexDirection: 'row', marginTop: 5, alignItems: 'baseline' }}>
                         <Ionicons name="ios-megaphone-outline" size={18} color="white" style={{ marginRight: 5 }} />
 

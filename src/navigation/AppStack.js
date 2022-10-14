@@ -10,6 +10,7 @@ import CustomDrawer from '../components/CustomDrawer';
 import { AntDesign } from '@expo/vector-icons'; 
 import FullReportScreen from '../screens/FullReportScreen';
 import GalleryFullView from '../screens/GalleryFullView';
+import SelectPicture from '../screens/SelectPictureScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -48,6 +49,10 @@ const AppStack = () => {
                 )
             }}/>
             <Drawer.Screen component={GalleryFullView} name="GalleryFullView" options={{drawerIcon: ({color}) => (
+                <AntDesign name="picture" size={22} color={color} /> 
+                )
+            }}/>
+            <Drawer.Screen component={SelectPicture} name="SelectPicture" options={{drawerIcon: ({color}) => (
                 <AntDesign name="picture" size={22} color={color} /> 
                 )
             }}/>

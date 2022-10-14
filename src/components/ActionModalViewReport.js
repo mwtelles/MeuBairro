@@ -29,7 +29,7 @@ export function ActionModalViewReport({ handleClose, handleNavigation, address }
                 shadowRadius: 4,
             }}>
                 <View style={{}}>
-                <Text style={{ color: '#000000', fontSize: 18, fontFamily: 'Inter-Medium', fontWeight: '700', paddingBottom: 10}}>Visualizando Relato de Buraco</Text>
+                <Text style={{ color: '#000000', fontSize: 20, fontFamily: 'Inter-Bold', fontWeight: '700', paddingBottom: 10}}>Buraco na rua</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 25 }}>
                     <View style={{backgroundColor:'rgba(0,0,0,0.2)', padding:15, borderRadius:100}}>

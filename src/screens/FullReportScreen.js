@@ -16,7 +16,7 @@ const FullReportScreen = ({ navigation }) => {
             <View>
                 <LinearGradient
                     colors={['#53E88B', '#15BE77', '#15BE77']}
-                    style={{ paddingVertical: 25 }}>
+                    style={{ paddingVertical: 50 }}>
                     <View style={{ backgroundColor: '#53E88B', width: '15%', padding: 14, marginLeft: 20, borderRadius: 10, opacity: 0.8 }}>
                         <TouchableOpacity onPress={() => navigation.goBack()}>
                             <MaterialCommunityIcons name="chevron-left" size={30} color="white" />
@@ -46,7 +46,10 @@ const FullReportScreen = ({ navigation }) => {
                         Buraco na rua
                     </Text>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 14, color: 'gray', fontFamily: 'Inter-Medium', marginTop: 10, marginBottom: 10 }}>R.José O Cura 80-234, Centro</Text>
+                        <View>
+                        <Text style={{ fontSize: 14, color: 'gray', fontFamily: 'Inter-Medium'}}>R.José O Cura 80-234, Centro</Text>
+                        <Text style={{ fontSize: 14, color: 'gray', fontFamily: 'Inter-Light', marginTop: 10, marginBottom: 10 }}>Publicado há 7 horas</Text>
+                        </View>
                     </View>
                     <View style={{ maxWidth: '95%' }}>
                         <Text style={{ textAlign: 'justify', fontFamily: 'Roboto-Regular', fontSize: 13, lineHeight: 19 }}>
@@ -62,6 +65,9 @@ const FullReportScreen = ({ navigation }) => {
                     </View>
                     <View>
                         <ImageGallery />
+                    </View>
+                    <View style={{marginTop: 50}}>
+                        <CustomButton label={'Gerar Relatorio'}/>
                     </View>
                 </View>
 
