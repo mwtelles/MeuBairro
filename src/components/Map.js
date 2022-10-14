@@ -1,21 +1,21 @@
-import { View, Dimensions, Text, TouchableOpacity } from 'react-native'
-import React, { useState, useEffect, useRef } from 'react'
-import MapView, { Callout } from 'react-native-maps';
-import { getAllNotifications } from '../services/api';
+import { View, Dimensions, Text, TouchableOpacity, Image } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import MapView, { Callout, PROVIDER_GOOGLE } from "react-native-maps";
+import { getAllNotifications } from "../services/api";
 
-import { MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-import * as Location from 'expo-location';
+import * as Location from "expo-location";
 
-import { Circle, Marker } from 'react-native-maps';
-import { ActionModalViewReport } from './ActionModalViewReport';
+import { Circle, Marker } from "react-native-maps";
+import { ActionModalViewReport } from "./ActionModalViewReport";
+import CustomCallout from "./CustomCallout";
 
-const { width, height } = Dimensions.get('screen')
+const { width, height } = Dimensions.get("screen");
 
 const Map = ({ userLocation, modalReportView }) => {
-
   const [userFirstLocation, setUserFirstLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
   const [notifications, setNotifications] = useState([]);
@@ -36,21 +36,21 @@ const Map = ({ userLocation, modalReportView }) => {
   }
 
   useEffect(() => {
-    getLocationPermission()
-    getUserLocation()
-    getNotifications()
-  }, [])
+    getLocationPermission();
+    getUserLocation();
+    getNotifications();
+  }, []);
 
   const getNotifications = async () => {
     const response = await getAllNotifications();
     setNotifications(response);
-  }
+  };
 
   function getLocationPermission() {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('A Permissão para acessar a localização foi negada!');
+      if (status !== "granted") {
+        setErrorMsg("A Permissão para acessar a localização foi negada!");
         return;
       }
     })();
@@ -68,7 +68,7 @@ const Map = ({ userLocation, modalReportView }) => {
             longitude: location.coords.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
-          })
+          });
           userLocation(location);
           // console.log('location', location)
           // mapRef.current.animateToRegion(location, 3 * 1000);
@@ -78,21 +78,23 @@ const Map = ({ userLocation, modalReportView }) => {
   }
 
   return (
-    <View style={{
-      flex: 1,
-      zIndex: 1,
-      marginTop: '-18%',
-    }}>
+    <View
+      style={{
+        flex: 1,
+        zIndex: 1,
+        marginTop: "-18%",
+      }}
+    >
       <MapView
         // ref={mapRef}
         style={{
           width: width,
           height: height,
         }}
-        mapType='standard'
+        mapType="standard"
         showsMyLocationButton={false}
-        minZoomLevel={16}
-        maxZoomLevel={19}
+        minZoomLevel={15}
+        maxZoomLevel={20}
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
@@ -109,6 +111,7 @@ const Map = ({ userLocation, modalReportView }) => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        // provider={PROVIDER_GOOGLE}
       >
         {notifications.map((notification, index) => {
           return (
@@ -118,142 +121,172 @@ const Map = ({ userLocation, modalReportView }) => {
                 latitude: notification.latitude,
                 longitude: notification.longitude,
               }}
-              onPress={(data) => openModalReportView([notification.latitude, notification.longitude])}
+              onPress={(data) =>
+                openModalReportView([
+                  notification.latitude,
+                  notification.longitude,
+                ])
+              }
             >
               <>
                 <View>
-                  <FontAwesome name="map-marker" size={45} color="green" />
+                  <Image
+                    source={require("../assets/markers/pin-example.png")}
+                    style={{ width: 55, height: 55 }}
+                  />
                 </View>
 
-                <Callout style={{ position: 'absolute', backgroundColor: 'red', width: '100%' }}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Entypo name="back-in-time" size={12} color="black" />
-                    <Text>Buraco</Text>
-                  </View>
+                <Callout tooltip={true}>
+                  <CustomCallout />
                 </Callout>
               </>
-
             </Marker>
-          )
+          );
         })}
       </MapView>
-      
     </View>
-  )
-}
+  );
+};
 
 const mapStyle = [
   {
-    "featureType": "administrative",
-    "elementType": "geometry",
-    "stylers": [
+    featureType: "administrative",
+    elementType: "geometry",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "administrative",
-    "elementType": "labels.icon",
-    "stylers": [
+    featureType: "administrative",
+    elementType: "labels.icon",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "administrative.locality",
-    "elementType": "labels.icon",
-    "stylers": [
+    featureType: "administrative.locality",
+    elementType: "labels.icon",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "administrative.province",
-    "elementType": "labels.icon",
-    "stylers": [
+    featureType: "administrative.province",
+    elementType: "labels.icon",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "poi",
-    "stylers": [
+    featureType: "poi",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "poi.attraction",
-    "stylers": [
+    featureType: "poi.attraction",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "poi.business",
-    "stylers": [
+    featureType: "poi.business",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "poi.business",
-    "elementType": "labels.icon",
-    "stylers": [
+    featureType: "poi.business",
+    elementType: "labels.icon",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "poi.government",
-    "stylers": [
+    featureType: "poi.government",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "poi.medical",
-    "stylers": [
+    featureType: "poi.medical",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "poi.place_of_worship",
-    "stylers": [
+    featureType: "poi.place_of_worship",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "road",
-    "elementType": "labels.icon",
-    "stylers": [
+    featureType: "road",
+    elementType: "labels.icon",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
-    "featureType": "transit",
-    "stylers": [
+    featureType: "road",
+    elementType: "geometry.stroke",
+    stylers: [
       {
-        "visibility": "off"
-      }
-    ]
-  }
+        // "color": "#dedede"
+      },
+    ],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "geometry.fill",
+    stylers: [
+      {
+        // "color": "#ffffff"
+      },
+    ],
+  },
+  {
+    featureType: "road.highway",
+    elementType: "geometry.stroke",
+    stylers: [
+      {
+        visibility: "on",
+        // "color": "#53E88B"
+      },
+    ],
+  },
+  {
+    featureType: "transit",
+    stylers: [
+      {
+        visibility: "off",
+      },
+    ],
+  },
 ];
 
-
-export default Map
+export default Map;

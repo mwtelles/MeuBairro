@@ -28,12 +28,12 @@ export function ActionModal({ handleClose, handleNavigation, address }) {
                 shadowRadius: 4,
             }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 25 }}>
-                    <View style={{backgroundColor:'rgba(0,0,0,0.2)', padding:15, borderRadius:100}}>
-                        <Ionicons name="location-outline" size={30} color="black" />
+                    <View style={{backgroundColor:'rgba(0,0,0,0.2)', borderRadius:100, width: 80, height: 80,}}>
+                        <Image source={require('../assets/markers/google-maps.png')} style={{ width: 80, height: 80, borderRadius: 100, resizeMode:'fill'}} />
                     </View>
                     <View style={{ flexDirection: 'column', paddingLeft: 10, paddingRight: 80 }}>
-                        <Text>Sua Localização</Text>
-                        <Text style={{ color: '#000000', fontSize: 16, fontFamily: 'Inter-Medium', fontWeight: '700' }}>{`${address.street}, ${address.house} ${address.sublocality} - ${address.area}/${address.region}`}</Text>
+                        <Text style={{fontSize:18, fontFamily:'Inter-Bold', marginBottom:5}}>Sua Localização</Text>
+                        <Text style={{ color: '#000000', fontSize: 15, fontFamily: 'Inter-Medium', maxWidth:'95%' }}>{`${address.street}, ${address.house} ${address.sublocality} - ${address.area}/${address.region}`}</Text>
                     </View>
                 </View>
                 <CustomButton label={'Criar relato'} onPress={handleNavigation} />
