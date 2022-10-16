@@ -6,7 +6,18 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import CustomButton from '../components/CustomButton';
 
+import SelectList from 'react-native-dropdown-select-list'
+
 const ReportsScreen = ({ navigation }) => {
+
+  const [selected, setSelected] = React.useState("");
+
+  const data = [
+    {key:'1',value:'Poste de Luz'},
+    {key:'2',value:'Pavimentação'},
+    {key:'3',value:'Lixo'},
+  ];
+
   return (
     <SafeAreaView style={{ flex: 1}}>
       <View>
@@ -26,9 +37,9 @@ const ReportsScreen = ({ navigation }) => {
             editable={false}
             ></TextInput>
           </TouchableOpacity>
-          <TouchableOpacity style={{ backgroundColor: 'rgba(0,0,0,0.1)', padding: 13, borderRadius: 8, marginBottom: 20 }}>
-            <TextInput placeholder='Selecione o tipo do problema'></TextInput>
-          </TouchableOpacity>
+          <View style={{marginBottom:20}}>
+          <SelectList setSelected={setSelected} data={data} onSelect={() => alert(selected)} placeholder='Selecione a categoria' searchPlaceholder='Pesquise pelo nome...'/>
+          </View>
           <TouchableOpacity style={{ backgroundColor: 'rgba(0,0,0,0.1)', paddingLeft: 13, paddingRight: 13, paddingTop: 13, paddingBottom: '10%' ,borderRadius: 8, marginBottom: 20 }}>
             <TextInput 
             placeholder='Descrição'
