@@ -2,7 +2,6 @@ import { SafeAreaView, View, TouchableOpacity, Text, Image } from 'react-native'
 import React from 'react'
 import CustomButton from './CustomButton'
 
-import { Ionicons } from '@expo/vector-icons';
 
 export function ActionModal({ handleClose, handleNavigation, address }) {
     return (

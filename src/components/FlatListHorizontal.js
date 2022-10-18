@@ -1,11 +1,11 @@
-import { View, Text, Dimensions, Image, ImageBackground } from 'react-native'
+import { View, Dimensions, Image} from 'react-native'
 import React from 'react'
 import { FlatList } from 'react-native-gesture-handler'
 
 const { width } = Dimensions.get('window');
 
 const FlatListHorizontal = ({ data }) => {
-    console.log('entrei aqui', data);
+    // console.log('entrei aqui', data);
     return (
         <FlatList
             data={data}
