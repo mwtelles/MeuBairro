@@ -29,7 +29,7 @@ export function ActionModal({ handleClose, handleNavigation, address }) {
             }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 25 }}>
                     <View style={{backgroundColor:'rgba(0,0,0,0.2)', borderRadius:100, width: 80, height: 80,}}>
-                        <Image source={require('../assets/markers/google-maps.png')} style={{ width: 80, height: 80, borderRadius: 100, resizeMode:'fill'}} />
+                        <Image source={require('../assets/markers/google-maps.png')} style={{ width: 80, height: 80, borderRadius: 100, objectFit:'fill'}} />
                     </View>
                     <View style={{ flexDirection: 'column', paddingLeft: 10, paddingRight: 80 }}>
                         <Text style={{fontSize:18, fontFamily:'Inter-Bold', marginBottom:5}}>Sua Localização</Text>
