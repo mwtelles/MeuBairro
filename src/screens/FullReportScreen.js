@@ -1,8 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-import FlatListHorizontal from '../components/FlatListHorizontal';
-
 import CustomButton from '../components/CustomButton';
 import ImageGallery from '../components/ImageGallery';
 
