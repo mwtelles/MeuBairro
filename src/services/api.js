@@ -36,6 +36,8 @@ export const updateUserImage = async (userId, image) => {
 
 export const getAllNotifications = async () => {
 
+  console.log('entrei aqui');
+
   try {
 
     const token = await AsyncStorage.getItem('userToken');
@@ -49,7 +51,7 @@ export const getAllNotifications = async () => {
     })
     return response.data.result.notifications;
 
-  }catch (e) {
+  } catch (e) {
     console.log(e);
   }
 
@@ -70,7 +72,41 @@ export const getTypesNotifications = async () => {
     })
     return response.data.result;
 
-  }catch (e) {
+  } catch (e) {
+    console.log(e);
+  }
+
+};
+
+export const createReport = async (data) => {
+
+  console.log('createReport', data.notification.location);
+
+  try {
+
+    const token = await AsyncStorage.getItem('userToken');
+    const email = await AsyncStorage.getItem('userEmail');
+    const response = await apiFront.post('/app/create/notification', {
+      typeId: data.notification.typeReport.selected,
+      title: data.notification.title,
+      description: data.notification.description,
+      authorId: 1,
+      statusId: 1,
+      latitude: data.notification.location.lat,
+      longitude: data.notification.location.lng,
+      photos: data.notification.images,
+    }, {
+      headers: {
+        'token': token,
+        'email': email,
+        'session': '',
+      }
+    })
+
+    console.log(response.data);
+    return response.data.result;
+
+  } catch (e) {
     console.log(e);
   }
 

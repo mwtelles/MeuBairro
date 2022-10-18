@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback, useRef } from "react";
+import React, { useContext, useState, useCallback, useRef, useEffect } from "react";
 import {
   View,
   SafeAreaView,
@@ -17,7 +17,7 @@ import Map from "../components/Map";
 import { ActionModal } from "../components/ActionModal";
 import { ActionModalViewReport } from "../components/ActionModalViewReport";
 import ReportView from "../components/ReportView";
-import { api } from "../services/api";
+import { api, getAllNotifications } from "../services/api";
 
 import BottomSheet from "@gorhom/bottom-sheet";
 
@@ -34,8 +34,10 @@ export default function HomeScreen() {
 
   const [location, setLocation] = useState([]);
   const [address, setAddress] = useState([]);
+  const [geolocation, setGeolocation] = useState([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleButton, setVisibleButton] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -44,6 +46,10 @@ export default function HomeScreen() {
   const [openRelate, setOpenRelate] = useState([]);
 
   const bottomSheetRef = useRef(null);
+
+  useEffect(() => {
+    getNotifications();
+  }, [])
 
   const getUserLocation = useCallback((location) => {
     setLocation([location.coords.latitude, location.coords.longitude]);
@@ -73,12 +79,19 @@ export default function HomeScreen() {
       if (!openRelate) {
         setVisibleModal(true);
         setAddress(address);
+        setGeolocation({latitude: location[0], longitude: location[1]});
       } else {
         setOpenRelate(address);
       }
     } catch (err) {
       console.log(err);
     }
+  };
+
+  
+  const getNotifications = async () => {
+    const response = await getAllNotifications();
+    setNotifications(response);
   };
 
   return (
@@ -119,6 +132,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </View>
       <Map
+        notifications={notifications}
         userLocation={getUserLocation}
         modalReportView={getModalReportView}
         style={{ zIndex: -1 }}
@@ -156,7 +170,10 @@ export default function HomeScreen() {
               address={address}
               handleClose={() => setVisibleModal(false)}
               handleNavigation={() => {
-                navigation.navigate("Reportar");
+                navigation.navigate("Reportar", {data: {
+                  address,
+                  geolocation
+                }});
                 setVisibleModal(false);
               }}
             />

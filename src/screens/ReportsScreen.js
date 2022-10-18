@@ -9,7 +9,7 @@ import CustomButton from '../components/CustomButton';
 import SelectList from 'react-native-dropdown-select-list'
 import { getTypesNotifications } from '../services/api';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ReportsScreen = () => {
 
@@ -17,17 +17,18 @@ const ReportsScreen = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dataNotification, setDataNotification] = useState({});
-
   const [typesNotifications, setTypesNotifications] = useState([]);
 
   const navigation = useNavigation();
+  const route = useRoute();
+  const { data } = route.params;
 
   useEffect(() => {
     (async () => {
       let newArray = [];
       const response = await getTypesNotifications();
       response.forEach((item, index) => {
-        newArray.push({ key: index+1, value: item.type });
+        newArray.push({ key: index + 1, value: item.type });
       });
       setTypesNotifications(newArray);
     })();
@@ -39,7 +40,18 @@ const ReportsScreen = () => {
       description,
       type: selected,
     });
-    navigation.navigate("SelectPicture", { dataNotification });
+    navigation.navigate("SelectPicture", {
+      data: {
+        title,
+        description,
+        type: {
+          selected,
+          name: typesNotifications.find((item) => item.key === selected).value
+        },
+        address: data.address,
+        location: data.geolocation,
+      }
+    });
   };
 
   return (
@@ -79,7 +91,7 @@ const ReportsScreen = () => {
         </View>
       </View>
       <View style={{ flex: 0, padding: 15 }}>
-        <CustomButton label={'Continuar'} onPress={handleSendReport}/>
+        <CustomButton label={'Continuar'} onPress={handleSendReport} />
       </View>
     </SafeAreaView>
   )
