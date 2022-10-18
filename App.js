@@ -14,6 +14,7 @@ function App() {
     'Roboto-Regular': require('./src/fonts/Roboto-Regular.ttf'),
     'Inter-Black': require('./src/fonts/Inter-Black.ttf'),
     'Inter-Bold': require('./src/fonts/Inter-Bold.ttf'),
+    'Inter-SemiBold': require('./src/fonts/Inter-SemiBold.ttf'),
     'Inter-Light': require('./src/fonts/Inter-Light.ttf'),
     'Inter-Medium': require('./src/fonts/Inter-Medium.ttf'),
     'Inter-Regular': require('./src/fonts/Inter-Regular.ttf'),
