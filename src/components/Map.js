@@ -15,10 +15,10 @@ import CustomCallout from "./CustomCallout";
 
 const { width, height } = Dimensions.get("screen");
 
-const Map = ({ userLocation, modalReportView }) => {
+const Map = ({ userLocation, modalReportView, notifications }) => {
   const [userFirstLocation, setUserFirstLocation] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
-  const [notifications, setNotifications] = useState([]);
+
 
   const [region, setRegion] = useState(null);
 
@@ -38,13 +38,7 @@ const Map = ({ userLocation, modalReportView }) => {
   useEffect(() => {
     getLocationPermission();
     getUserLocation();
-    getNotifications();
   }, []);
-
-  const getNotifications = async () => {
-    const response = await getAllNotifications();
-    setNotifications(response);
-  };
 
   function getLocationPermission() {
     (async () => {

@@ -15,11 +15,19 @@ import CustomButton from "../components/CustomButton";
 import Camera from "../assets/icons/Camera";
 import FlatListHorizontal from "../components/FlatListHorizontal";
 
-const SelectPictureScreen = ({ navigation }) => {
+import { useNavigation, useRoute } from "@react-navigation/native";
+
+const SelectPictureScreen = () => {
 
   const [images, setImages] = React.useState([]);
 
+  const navigation = useNavigation();
+  const route = useRoute();
 
+  const { data } = route.params;
+
+
+  // console.log(data);
 
   const handleUploadGallery = async (userId) => {
     let setUri = [];
@@ -37,7 +45,15 @@ const SelectPictureScreen = ({ navigation }) => {
     };
   };
 
-  console.log(images);
+  const handleConfirmDataNotification = () => {
+    navigation.navigate("ConfirmReport", {data: {
+      title: data.title,
+      description: data.description,
+      typeReport: data.type,
+      images: images,
+      ...data.address
+    }});
+  };
 
 
 
@@ -137,7 +153,7 @@ const SelectPictureScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0, padding: 15 }}>
-        <CustomButton label={"Continuar"} onPress={() => navigation.navigate('ConfirmReport')}/>
+        <CustomButton label={"Continuar"} onPress={() => handleConfirmDataNotification()}/>
       </View>
     </SafeAreaView>
   );

@@ -4,25 +4,134 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  ActivityIndicator
 } from "react-native";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import FlatListHorizontal from "../components/FlatListHorizontal";
 import CustomButton from "../components/CustomButton";
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../services/firebase";
+import { createReport } from "../services/api";
 
 const ConfirmReportScreen = () => {
 
-    const navigation = useNavigation();
+  const navigation = useNavigation();
+  const route = useRoute();
 
-    const data = [
-        { url: require("../assets/images/examples/buraco-na-rua.jpg") },
-        { url: require("../assets/images/examples/buraco-2.jpeg") },
-        { url: require("../assets/images/examples/buraco-3.jpeg") },
-      ];
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [storageImages, setStorageImages] = React.useState([]);
+
+  const { data } = route.params;
+
+  // const data = [
+  //     { url: require("../assets/images/examples/buraco-na-rua.jpg") },
+  //     { url: require("../assets/images/examples/buraco-2.jpeg") },
+  //     { url: require("../assets/images/examples/buraco-3.jpeg") },
+  //   ];
+
+  async function uploadImageDatabase() {
+    setIsLoading(true);
+    // data.images.forEach(async (img) => {
+    //   const blob = await new Promise((resolve, reject) => {
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.onload = function () {
+    //       resolve(xhr.response);
+    //     };
+    //     xhr.onerror = function () {
+    //       reject(new TypeError("Network request failed"));
+    //     };
+    //     xhr.responseType = "blob";
+    //     xhr.open("GET", img.url, true);
+    //     xhr.send(null);
+    //   });
+
+    //   const storageRef = ref(storage, `images/notifications/${blob["_data"].blobId}`);
+
+    //   const upload = uploadBytesResumable(storageRef, blob);
+    //   upload.on("state_changed", (snapshot) => {
+    //     console.log(
+    //       "passei por aqui",
+    //       snapshot.bytesTransferred,
+    //       snapshot.totalBytes
+    //     );
+    //   }, (error) => {
+    //     console.log(error);
+    //   }, () => {
+    //     getDownloadURL(upload.snapshot.ref).then((downloadURL) => {
+    //       setStorageImages(...images, downloadURL);
+    //     });
+    //   }
+    //   );
+
+    // });
+    let img = [];
+    for (let i = 0; i < data.images.length; i++) {
+
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function () {
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", data.images[i].url, true);
+        xhr.send(null);
+      });
+
+      const storageRef = ref(storage, `images/notifications/${blob["_data"].blobId}`);
+
+      const upload = uploadBytesResumable(storageRef, blob);
+      upload.on("state_changed", (snapshot) => {
+        console.log(
+          "passei por aqui",
+          snapshot.bytesTransferred,
+          snapshot.totalBytes
+        );
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        getDownloadURL(upload.snapshot.ref).then((downloadURL) => {
+          img.push(downloadURL);
+        });
+      }
+      );
+    }
+    setTimeout(() => {
+      setStorageImages(img);
+    }, 10000)
+  };
+
+  const handleCreateReport = async () => {
+
+    try {
+      await uploadImageDatabase();
+      setTimeout(() => {
+        sendReport();
+      }, 25000)
+    } catch (e) {
+      console.log(e);
+    }
+
+  };
+
+  const sendReport = useCallback(() => {
+    console.log('entrei aqui sendReport');
+    (async () => {
+      if (storageImages.length >= 2) {
+        await createReport({ notification: data, images: storageImages });
+        setIsLoading(false);
+        navigation.navigate("Home");
+      }
+    })();
+  }, [storageImages]);
+
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "space-around" }}>
@@ -51,7 +160,7 @@ const ConfirmReportScreen = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             marginTop: 15,
-            padding:15,
+            padding: 15,
           }}
         >
           <View
@@ -70,11 +179,11 @@ const ConfirmReportScreen = () => {
                 fontFamily: "Inter-Medium",
               }}
             >
-              Pavimentação
+              {data.typeReport.name}
             </Text>
           </View>
         </View>
-        <View style={{padding:15}}>
+        <View style={{ padding: 15 }}>
           <Text
             style={{
               fontSize: 24,
@@ -83,7 +192,7 @@ const ConfirmReportScreen = () => {
               marginBottom: 10,
             }}
           >
-            Buraco na rua
+            {data.title}
           </Text>
           <View style={{ flexDirection: "row" }}>
             <Text
@@ -94,10 +203,10 @@ const ConfirmReportScreen = () => {
                 marginTop: 10,
               }}
             >
-              R.José O Cura 80-234, Centro
+              {`${data.street}, ${data.house} ${data.sublocality} - ${data.area}/${data.region}`}
             </Text>
           </View>
-          <View style={{ maxWidth: "95%", paddingVertical:15 }}>
+          <View style={{ maxWidth: "95%", paddingVertical: 15 }}>
             <Text
               style={{
                 textAlign: "justify",
@@ -106,17 +215,14 @@ const ConfirmReportScreen = () => {
                 lineHeight: 19,
               }}
             >
-              Lorem ipsum dolor sit amet consectetur adipiscing elit, urna
-              consequat felis vehicula class ultricies mollis dictumst, aenean
-              non a in donec nulla. Phasellus ante pellentesque erat cum risus
-              consequat imperdiet.
+              {data.description}
             </Text>
           </View>
           <View>
-          <FlatListHorizontal data={data} />
+            <FlatListHorizontal data={data.images} />
           </View>
-          <View style={{marginVertical:20}}>
-            <CustomButton label={'Criar Relato'} onPress={() => {}}/>
+          <View style={{ marginVertical: 20 }}>
+            <CustomButton label={isLoading ? <ActivityIndicator size={"large"} /> : 'Criar Relato'} onPress={handleCreateReport} />
           </View>
         </View>
       </View>
