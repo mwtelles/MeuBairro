@@ -118,7 +118,7 @@ export default function HomeScreen() {
           <MaterialIcons name="menu" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.openDrawer()}
+          onPress={() => console.log('Modal em construção')}
           style={{
             backgroundColor: "rgba(83, 232, 139, 0.78)",
             borderRadius: 12,
