@@ -25,13 +25,13 @@ const CustomDrawer = (props) => {
                     style={{ padding: 20 }}
                 >
                     <Image
-                        source={require('../assets/images/examples/1.jpg')}
+                        source={{ uri: userInfo.result.user.photo_url }}
                         style={{ width: 90, height: 90, borderRadius: 18, marginBottom: 20, resizeMode:'cover' }} />
                     <Text style={{ color: '#fff', fontSize: 18, fontFamily: 'Inter-Bold' }}>{userInfo.result.user.name}</Text>
                     <View style={{ flexDirection: 'row', marginTop: 5, alignItems: 'baseline' }}>
                         <Ionicons name="ios-megaphone-outline" size={18} color="white" style={{ marginRight: 5 }} />
 
-                        <Text style={{ color: '#fff', fontSize: 14, fontFamily: 'Roboto-Regular', marginTop: 5 }}>350 Interações</Text>
+                        <Text style={{ color: '#fff', fontSize: 14, fontFamily: 'Roboto-Regular', marginTop: 5 }}>1000 Pontos</Text>
                     </View>
                 </LinearGradient>
                 <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: 15 }}>
