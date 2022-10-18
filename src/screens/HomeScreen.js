@@ -21,7 +21,12 @@ import { api } from "../services/api";
 
 import BottomSheet from "@gorhom/bottom-sheet";
 
-export default function HomeScreen({ navigation }) {
+import { useNavigation } from '@react-navigation/native'
+
+export default function HomeScreen() {
+
+  const navigation = useNavigation();
+  
   const { width, height } = Dimensions.get("screen");
 
   const { userInfo } = useContext(AuthContext);
@@ -82,7 +87,7 @@ export default function HomeScreen({ navigation }) {
         style={{
           flexDirection: "row",
           zIndex: 2,
-          maxWidth: "20%",
+          justifyContent:'space-between'
         }}
       >
         <TouchableOpacity
@@ -97,6 +102,19 @@ export default function HomeScreen({ navigation }) {
           }}
         >
           <MaterialIcons name="menu" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.openDrawer()}
+          style={{
+            backgroundColor: "rgba(83, 232, 139, 0.78)",
+            borderRadius: 12,
+            padding: 18,
+            marginRight: 15,
+            top:50,
+            bottom:0,
+          }}
+        >
+          <MaterialIcons name="filter-alt" size={24} color="white" />
         </TouchableOpacity>
       </View>
       <Map
@@ -137,7 +155,7 @@ export default function HomeScreen({ navigation }) {
               address={address}
               handleClose={() => setVisibleModal(false)}
               handleNavigation={() => {
-                navigation.navigate("Relatar Problema");
+                navigation.navigate("Reportar");
                 setVisibleModal(false);
               }}
             />

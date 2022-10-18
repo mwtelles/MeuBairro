@@ -14,7 +14,7 @@ const RankingScreen = ({ navigation }) => {
       <View style={{ flex: 1 }}>
         <LinearGradient
           colors={['#53E88B', '#15BE77', '#15BE77']}
-          style={{ paddingVertical: 35 }}>
+          style={{ paddingVertical: 25 }}>
           <View style={{ backgroundColor: '#53E88B', width: '15%', padding: 14, marginLeft: 20, borderRadius: 10, opacity: 0.8 }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <MaterialCommunityIcons name="chevron-left" size={30} color="white" />
@@ -23,24 +23,25 @@ const RankingScreen = ({ navigation }) => {
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Image
               source={require('../assets/images/illustrations/user-profile.jpg')}
-              style={{ width: 100, height: 100, borderRadius: 100 }} />
-            <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold', paddingTop: 5 }}>
+              style={{ width: 140, height: 140, borderRadius: 8 }} />
+            <Text style={{ color: 'white', fontSize: 20, paddingTop: 10, fontFamily: 'Inter-Bold' }}>
               {userInfo.result.user.name}
             </Text>
-            <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold', paddingTop: 5 }}>
+            <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold', paddingTop: 5 }}>
               {userInfo.result.user.cpf}
             </Text>
           </View>
         </LinearGradient>
       </View>
-      <View style={{ paddingVertical: 15, paddingHorizontal:15 ,justifyContent: 'space-between', alignItems: 'center', borderColor: 'rgba(0,0,0,0.11)', borderTopWidth: 1, borderBottomWidth: 1, flexDirection: 'row' }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-          <Text style={{ fontSize: 30 }}>1</Text>
-          <Text style={{ fontSize: 10 }}>posição</Text>
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image source={require('../assets/images/illustrations/user-profile.jpg')} style={{ width: 55, height: 55, borderRadius: 8 }} />
+      <View style={{ paddingVertical: 15, paddingHorizontal:15 , alignItems: 'center', borderColor: 'rgba(0,0,0,0.11)', borderTopWidth: 1, borderBottomWidth: 1, flexDirection: 'row', }}>
+        <View style={{ justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', }}>
+          <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', paddingRight:'10%' }}>
+            <Text style={{ fontSize: 30 }}>1</Text>
+            <Text style={{ fontSize: 10 }}>posição</Text>
+          </View>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent:'center', paddingRight:'29%' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image source={require('../assets/images/illustrations/user-profile.jpg')} style={{ width: 55, height: 55, borderRadius: 8 }} />
             <View style={{ flexDirection: 'column', paddingLeft: '5%', alignItems:'flex-start'}}>
               <Text style={{ color: 'black', fontSize: 20, fontWeight: '600', paddingTop: 5 }}>
                 {userInfo.result.user.name}
@@ -51,6 +52,8 @@ const RankingScreen = ({ navigation }) => {
             </View>
           </View>
         </View>
+        </View>
+        
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Text style={{ fontSize: 30 }}>10</Text>
           <Text style={{ fontSize: 10 }}>Interações</Text>

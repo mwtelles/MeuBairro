@@ -5,7 +5,12 @@ import FlatListHorizontal from "./FlatListHorizontal";
 
 import CustomButton from "./CustomButton";
 
-const ReportView = ({ navigation }) => {
+import { useNavigation } from '@react-navigation/native'
+
+const ReportView = () => {
+
+  const navigation = useNavigation();
+
   const data = [
     { url: require("../assets/images/examples/buraco-na-rua.jpg") },
     { url: require("../assets/images/examples/buraco-2.jpeg") },
@@ -163,7 +168,7 @@ const ReportView = ({ navigation }) => {
           <View style={{ marginTop: 30 }}>
             <CustomButton
               label={"Ver Relato Completo"}
-              onPress={() => navigation.navigate("FullReport")}
+              onPress={() => navigation.navigate('FullReport')}
             />
           </View>
         </View>
