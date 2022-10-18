@@ -137,7 +137,7 @@ const SelectPictureScreen = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 0, padding: 15 }}>
-        <CustomButton label={"Continuar"} />
+        <CustomButton label={"Continuar"} onPress={() => navigation.navigate('ConfirmReport')}/>
       </View>
     </SafeAreaView>
   );
