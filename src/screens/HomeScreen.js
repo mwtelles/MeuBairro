@@ -22,6 +22,7 @@ import { api } from "../services/api";
 import BottomSheet from "@gorhom/bottom-sheet";
 
 import { useNavigation } from '@react-navigation/native'
+import FilterModal from "../components/FilterModal";
 
 export default function HomeScreen() {
 
