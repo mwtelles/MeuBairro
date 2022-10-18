@@ -54,3 +54,24 @@ export const getAllNotifications = async () => {
   }
 
 };
+
+export const getTypesNotifications = async () => {
+
+  try {
+
+    const token = await AsyncStorage.getItem('userToken');
+    const email = await AsyncStorage.getItem('userEmail');
+    const response = await apiFront.get('/app/types-notifications', {
+      headers: {
+        'token': token,
+        'email': email,
+        'session': '',
+      }
+    })
+    return response.data.result;
+
+  }catch (e) {
+    console.log(e);
+  }
+
+};

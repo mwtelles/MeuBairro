@@ -8,12 +8,39 @@ import {
 import React from "react";
 
 import Fotolib from "../assets/icons/Fotolib";
+import * as ImagePicker from "expo-image-picker";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CustomButton from "../components/CustomButton";
 import Camera from "../assets/icons/Camera";
+import FlatListHorizontal from "../components/FlatListHorizontal";
 
 const SelectPictureScreen = ({ navigation }) => {
+
+  const [images, setImages] = React.useState([]);
+
+
+
+  const handleUploadGallery = async (userId) => {
+    let setUri = [];
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      aspect: [4, 3],
+      quality: 1,
+      allowsMultipleSelection: true,
+    })
+    if(!result.cancelled){
+      result.selected.forEach((object) => {
+        setUri.push({url: object.uri});
+      })
+      setImages(setUri);
+    };
+  };
+
+  console.log(images);
+
+
+
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "space-around" }}>
       <View>
@@ -53,7 +80,7 @@ const SelectPictureScreen = ({ navigation }) => {
           </Text>
         </View>
         <View style={{ padding: 14 }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {handleUploadGallery(), setImages([])}}>
             <View
               style={{
                 backgroundColor: "white",
@@ -78,8 +105,10 @@ const SelectPictureScreen = ({ navigation }) => {
               >
                 Biblioteca de Fotos
               </Text>
+              
             </View>
           </TouchableOpacity>
+          <FlatListHorizontal data={images} />
           <TouchableOpacity>
             <View
               style={{
