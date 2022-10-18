@@ -7,6 +7,7 @@ import FullReportScreen from '../screens/FullReportScreen';
 import GalleryFullView from '../screens/GalleryFullView';
 import SelectPicture from '../screens/SelectPictureScreen';
 import HomeScreen from '../screens/HomeScreen';
+import ConfirmReportScreen from '../screens/ConfirmReportScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ function Routes() {
         <Stack.Screen name="FullReport" component={FullReportScreen}/>
         <Stack.Screen name="GalleryFullView" component={GalleryFullView}/>
         <Stack.Screen name="SelectPicture" component={SelectPicture}/>
+        <Stack.Screen name="ConfirmReport" component={ConfirmReportScreen}/>
     </Stack.Navigator>
   )
 }
