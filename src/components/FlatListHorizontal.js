@@ -5,10 +5,11 @@ import { FlatList } from 'react-native-gesture-handler'
 const { width } = Dimensions.get('window');
 
 const FlatListHorizontal = ({ data }) => {
+    console.log('entrei aqui', data);
     return (
         <FlatList
             data={data}
-            keyExtractor={item => String(item)}
+            keyExtractor={item => String(item.url)}
             showsHorizontalScrollIndicator={false}
             horizontal
             snapToOffsets={[...Array(data.length)].map(
@@ -17,8 +18,9 @@ const FlatListHorizontal = ({ data }) => {
             snapToAlignment={'start'}
             scrollEventThrottle={16}
             decelerationRate={'fast'}
-            renderItem={({ item }) =>
+            renderItem={({ item, index }) =>
                 <View
+                key={index}
                     style={{
                         backgroundColor:'gray',
                         height: width / 2.6,
@@ -28,8 +30,7 @@ const FlatListHorizontal = ({ data }) => {
                         marginLeft: 0
                     }}
                 >
-                    <Image source={item.url} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 10 }} />
-                    {/* <Image source={require('../assets/images/examples/1.jpg')} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 10 }} /> */}
+                    <Image source={{uri: item.url}} style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 10 }} />
                 </View>}
         />
     )
