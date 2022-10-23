@@ -1,33 +1,26 @@
-import { View, Dimensions, Text, TouchableOpacity, Image } from "react-native";
+import { View, Dimensions, Image } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
-import MapView, { Callout, PROVIDER_GOOGLE } from "react-native-maps";
-import { getAllNotifications } from "../services/api";
-
-import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import MapView, { Callout } from "react-native-maps";
 
 import * as Location from "expo-location";
 
-import { Circle, Marker } from "react-native-maps";
-import { ActionModalViewReport } from "./ActionModalViewReport";
+import { Marker } from "react-native-maps";
 import CustomCallout from "./CustomCallout";
+
+let firstLocation = {};
+
+const reportIcon = {
+  "buraco": require("../assets/markers/buraco.png"),
+  "esgoto": require("../assets/markers/esgoto.png"),
+  "luminaria": require("../assets/markers/luz.png"),
+}
 
 const { width, height } = Dimensions.get("screen");
 
 const Map = ({ userLocation, modalReportView, notifications }) => {
-  const [userFirstLocation, setUserFirstLocation] = useState({});
-  const [errorMsg, setErrorMsg] = useState(null);
 
-
+  const mapRef = useRef();
   const [region, setRegion] = useState(null);
-
-  const [pin, setPin] = useState({
-    latitude: -22.4070467,
-    longitude: -43.66119,
-  });
-
-  // const mapRef = useRef(null);
 
   function openModalReportView(data) {
     if (data) {
@@ -37,7 +30,6 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
 
   useEffect(() => {
     getLocationPermission();
-    getUserLocation();
   }, []);
 
   function getLocationPermission() {
@@ -50,25 +42,27 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
     })();
   }
 
-  function getUserLocation(location) {
-    if (location) {
-      const { latitude, longitude } = location;
-      setUserFirstLocation(location);
-      if (latitude !== userFirstLocation.latitude) {
-        (async () => {
-          let location = await Location.getCurrentPositionAsync({});
-          setRegion({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          });
-          userLocation(location);
-          // console.log('location', location)
-          // mapRef.current.animateToRegion(location, 3 * 1000);
-        })();
-      }
+  function getUserLocation(position) {
+    const { latitude, longitude } = position.nativeEvent.coordinate;
+    if (position) {
+      if (latitude !== firstLocation.latitude) {
+        console.log("latitude", latitude);
+        setRegion({
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
+        userLocation({ latitude, longitude });
+        mapRef.current.animateToRegion({
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }, 1000);
+      };
     }
+    firstLocation = {latitude, longitude};
   }
 
   return (
@@ -80,11 +74,11 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
       }}
     >
       <MapView
-        // ref={mapRef}
         style={{
           width: width,
           height: height,
         }}
+        ref={mapRef}
         mapType="standard"
         showsMyLocationButton={false}
         minZoomLevel={15}
@@ -92,7 +86,7 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
         rotateEnabled={false}
         region={region}
         showsUserLocation={true}
-        onUserLocationChange={(location) => getUserLocation(location.nativeEvent.coordinate)}
+        onUserLocationChange={getUserLocation}
         loadingEnabled={true}
         showsBuildings={false}
         showsTraffic={false}
@@ -105,7 +99,6 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        // provider={PROVIDER_GOOGLE}
       >
         {notifications.map((notification, index) => {
           return (
@@ -125,8 +118,8 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
               <>
                 <View>
                   <Image
-                    source={require("../assets/markers/pin-example.png")}
-                    style={{ width: 55, height: 55 }}
+                    source={reportIcon[notification.type.toLowerCase()]}
+                    style={{ width: 45, height: 45 }}
                   />
                 </View>
 

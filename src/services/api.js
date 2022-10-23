@@ -36,8 +36,6 @@ export const updateUserImage = async (userId, image) => {
 
 export const getAllNotifications = async () => {
 
-  console.log('entrei aqui');
-
   try {
 
     const token = await AsyncStorage.getItem('userToken');
@@ -80,7 +78,7 @@ export const getTypesNotifications = async () => {
 
 export const createReport = async (data) => {
 
-  console.log('createReport', data.notification.location);
+  console.log('createReport', data);
 
   try {
 
@@ -94,7 +92,7 @@ export const createReport = async (data) => {
       statusId: 1,
       latitude: data.notification.location.lat,
       longitude: data.notification.location.lng,
-      photos: data.notification.images,
+      photos: data.images,
     }, {
       headers: {
         'token': token,

@@ -11,11 +11,9 @@ export default function CustomButton({ label, onPress }) {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
         >
-            <TouchableOpacity onPress={onPress} style={{}}>
-                <Text style={{ color: 'white', textAlign: 'center', fontWeight: '700', fontSize: 16 }}>{label}</Text>
+            <TouchableOpacity onPress={onPress}>
+                {typeof label == 'string' ? (<Text style={{ color: 'white', textAlign: 'center', fontWeight: '700', fontSize: 16 }}>{label}</Text>) : label}
             </TouchableOpacity>
         </LinearGradient>
     )
 }
-
-const styles = StyleSheet.create({})

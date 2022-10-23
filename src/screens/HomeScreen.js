@@ -24,7 +24,11 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import { useNavigation } from '@react-navigation/native'
 import FilterModal from "../components/FilterModal";
 
+import { useIsFocused } from '@react-navigation/native';
+
 export default function HomeScreen() {
+
+  const isFocused = useIsFocused();
 
   const navigation = useNavigation();
   
@@ -47,12 +51,8 @@ export default function HomeScreen() {
 
   const bottomSheetRef = useRef(null);
 
-  useEffect(() => {
-    getNotifications();
-  }, [])
-
   const getUserLocation = useCallback((location) => {
-    setLocation([location.coords.latitude, location.coords.longitude]);
+    setLocation([location.latitude, location.longitude]);
   }, []);
 
   const getModalReportView = useCallback((openModalReportView) => {
@@ -88,6 +88,9 @@ export default function HomeScreen() {
     }
   };
 
+  useEffect(() => {
+    getNotifications();
+  }, [isFocused])
   
   const getNotifications = async () => {
     const response = await getAllNotifications();
