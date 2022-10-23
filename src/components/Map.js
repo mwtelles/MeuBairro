@@ -46,7 +46,6 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
     const { latitude, longitude } = position.nativeEvent.coordinate;
     if (position) {
       if (latitude !== firstLocation.latitude) {
-        console.log("latitude", latitude);
         setRegion({
           latitude: latitude,
           longitude: longitude,
@@ -112,6 +111,7 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
                 openModalReportView([
                   notification.latitude,
                   notification.longitude,
+                  notification.id
                 ])
               }
             >

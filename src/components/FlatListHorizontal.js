@@ -5,6 +5,7 @@ import { FlatList } from 'react-native-gesture-handler'
 const { width } = Dimensions.get('window');
 
 const FlatListHorizontal = ({ data }) => {
+
     return (
         <FlatList
             data={data}

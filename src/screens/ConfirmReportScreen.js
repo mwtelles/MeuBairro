@@ -86,7 +86,6 @@ const ConfirmReportScreen = () => {
   };
 
   const sendReport = useCallback((data, storageImages) => {
-    console.log("enviando relatório");
     (async () => {
       if (storageImages.length >= 2) {
         await createReport({ notification: data, images: storageImages });

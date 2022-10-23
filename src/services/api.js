@@ -55,6 +55,29 @@ export const getAllNotifications = async () => {
 
 };
 
+
+export const getNotificationsById = async (id) => {
+
+  try {
+
+    const token = await AsyncStorage.getItem('userToken');
+    const email = await AsyncStorage.getItem('userEmail');
+    const response = await apiFront.get(`/app/notifications/${id}`, {
+      headers: {
+        'token': token,
+        'email': email,
+        'session': '',
+      }
+    })
+    
+    return response.data.result[0];
+
+  } catch (e) {
+    console.log(e);
+  }
+
+};
+
 export const getTypesNotifications = async () => {
 
   try {
@@ -78,8 +101,6 @@ export const getTypesNotifications = async () => {
 
 export const createReport = async (data) => {
 
-  console.log('createReport', data);
-
   try {
 
     const token = await AsyncStorage.getItem('userToken');
@@ -100,8 +121,6 @@ export const createReport = async (data) => {
         'session': '',
       }
     })
-
-    console.log(response.data);
     return response.data.result;
 
   } catch (e) {
