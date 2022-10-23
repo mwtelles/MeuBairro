@@ -1,16 +1,11 @@
 import React, { useContext, useState, useCallback, useRef, useEffect } from "react";
 import {
   View,
-  SafeAreaView,
   TouchableOpacity,
   Modal,
-  Text,
   StatusBar,
   Dimensions,
 } from "react-native";
-
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { MaterialIcons } from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
 import Map from "../components/Map";
@@ -18,44 +13,32 @@ import { ActionModal } from "../components/ActionModal";
 import { ActionModalViewReport } from "../components/ActionModalViewReport";
 import ReportView from "../components/ReportView";
 import { api, getAllNotifications } from "../services/api";
-
 import BottomSheet from "@gorhom/bottom-sheet";
-
 import { useNavigation } from '@react-navigation/native'
-import FilterModal from "../components/FilterModal";
+import { useIsFocused } from '@react-navigation/native';
 
 export default function HomeScreen() {
 
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
-  
-  const { width, height } = Dimensions.get("screen");
-
-  const { userInfo } = useContext(AuthContext);
-
+  const { height } = Dimensions.get("screen");
   const [location, setLocation] = useState([]);
   const [address, setAddress] = useState([]);
   const [geolocation, setGeolocation] = useState([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleButton, setVisibleButton] = useState(false);
   const [notifications, setNotifications] = useState([]);
-
   const [isVisible, setIsVisible] = useState(false);
-
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
-
   const [openRelate, setOpenRelate] = useState([]);
-
   const bottomSheetRef = useRef(null);
 
-  useEffect(() => {
-    getNotifications();
-  }, [])
-
   const getUserLocation = useCallback((location) => {
-    setLocation([location.coords.latitude, location.coords.longitude]);
+    setLocation([location.latitude, location.longitude]);
   }, []);
 
   const getModalReportView = useCallback((openModalReportView) => {
+    // console.log("openModalReportView", openModalReportView);
     setIsVisible(true);
     openNotificationModal(openModalReportView, true);
   }, []);
@@ -81,13 +64,16 @@ export default function HomeScreen() {
         setAddress(address);
         setGeolocation({latitude: location[0], longitude: location[1]});
       } else {
-        setOpenRelate(address);
+        setOpenRelate({location: {latitude: location[0], longitude: location[1]}, id: location[2]});
       }
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    getNotifications();
+  }, [isFocused])
   
   const getNotifications = async () => {
     const response = await getAllNotifications();
@@ -180,10 +166,11 @@ export default function HomeScreen() {
           </Modal>
           {isVisible && (
             <ActionModalViewReport
-              address={openRelate}
+              data={openRelate}
               handleClose={() => {
                 setIsVisible(false);
                 setIsBottomSheetVisible(false);
+                setOpenRelate([]);
               }}
               handleNavigation={() => {
                 bottomSheetRef.current?.expand();

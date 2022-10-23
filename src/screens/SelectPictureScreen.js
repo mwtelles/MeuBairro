@@ -9,6 +9,7 @@ import React from "react";
 
 import Fotolib from "../assets/icons/Fotolib";
 import * as ImagePicker from "expo-image-picker";
+// import ImagePicker from 'react-native-image-crop-picker';
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CustomButton from "../components/CustomButton";
@@ -31,28 +32,31 @@ const SelectPictureScreen = () => {
 
   const handleUploadGallery = async (userId) => {
     let setUri = [];
+
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
       quality: 1,
       allowsMultipleSelection: true,
     })
-    if(!result.cancelled){
+    if (!result.cancelled) {
       result.selected.forEach((object) => {
-        setUri.push({url: object.uri});
+        setUri.push({ url: object.uri });
       })
       setImages(setUri);
     };
   };
 
   const handleConfirmDataNotification = () => {
-    navigation.navigate("ConfirmReport", {data: {
-      title: data.title,
-      description: data.description,
-      typeReport: data.type,
-      images: images,
-      ...data.address
-    }});
+    navigation.navigate("ConfirmReport", {
+      data: {
+        title: data.title,
+        description: data.description,
+        typeReport: data.type,
+        images: images,
+        ...data.address
+      }
+    });
   };
 
 
@@ -96,7 +100,7 @@ const SelectPictureScreen = () => {
           </Text>
         </View>
         <View style={{ padding: 14 }}>
-          <TouchableOpacity onPress={() => {handleUploadGallery(), setImages([])}}>
+          <TouchableOpacity onPress={() => { handleUploadGallery(), setImages([]) }}>
             <View
               style={{
                 backgroundColor: "white",
@@ -110,7 +114,7 @@ const SelectPictureScreen = () => {
             >
               <Fotolib />
 
-              
+
               <Text
                 style={{
                   fontSize: 16,
@@ -121,7 +125,7 @@ const SelectPictureScreen = () => {
               >
                 Biblioteca de Fotos
               </Text>
-              
+
             </View>
           </TouchableOpacity>
           <FlatListHorizontal data={images} />
@@ -153,7 +157,7 @@ const SelectPictureScreen = () => {
         </View>
       </View>
       <View style={{ flex: 0, padding: 15 }}>
-        <CustomButton label={"Continuar"} onPress={() => handleConfirmDataNotification()}/>
+        <CustomButton label={"Continuar"} onPress={() => handleConfirmDataNotification()} />
       </View>
     </SafeAreaView>
   );
