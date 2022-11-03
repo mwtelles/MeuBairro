@@ -1,8 +1,10 @@
 {
   "expo": {
     "name": "MeuBairro",
-    "slug": "MeuBairro",
+    "slug": "meubairro",
+    "owner": "mwtelles",
     "version": "1.0.0",
+    "githubUrl": "https://github.com/mwtelles/MeuBairro",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",

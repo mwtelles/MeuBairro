@@ -34,7 +34,7 @@ const RankingScreen = ({ navigation }) => {
           </View>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Image
-              source={require("../assets/images/illustrations/user-profile.jpg")}
+              source={{ uri: userInfo.result.user.photo_url }}
               style={{ width: 140, height: 140, borderRadius: 100 }}
             />
             <Text
@@ -45,7 +45,7 @@ const RankingScreen = ({ navigation }) => {
                 fontFamily: "Inter-Bold",
               }}
             >
-              {userInfo.result.user.name}
+              Vinicius Almeida
             </Text>
             <Text
               style={{
@@ -55,7 +55,7 @@ const RankingScreen = ({ navigation }) => {
                 paddingTop: 5,
               }}
             >
-              Morro da Vaca
+              Centro
             </Text>
           </View>
         </LinearGradient>
@@ -94,7 +94,7 @@ const RankingScreen = ({ navigation }) => {
               flexDirection: "row",
               justifyContent: "center",
               alignContent: "center",
-              paddingRight: "40%",
+              paddingRight: "23%",
             }}
           >
             <View style={{ flexDirection: "row", borderColor: "gray" }}>
@@ -107,7 +107,7 @@ const RankingScreen = ({ navigation }) => {
                     paddingTop: 5,
                   }}
                 >
-                  {userInfo.result.user.name}
+                  Vinicius Almeida
                 </Text>
                 <Text
                   style={{
@@ -117,7 +117,7 @@ const RankingScreen = ({ navigation }) => {
                     paddingLeft: 2
                   }}
                 >
-                  Morro da Vaca
+                  Centro
                 </Text>
               </View>
             </View>
@@ -129,6 +129,215 @@ const RankingScreen = ({ navigation }) => {
           <Text style={{ fontSize: 12, fontFamily: "Inter-SemiBold" }}>Pontos</Text>
         </View>
       </View>
+      <View
+        style={{
+          paddingVertical: 15,
+          paddingHorizontal: 15,
+          alignItems: "center",
+          borderColor: "rgba(0,0,0,0.11)",
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          flexDirection: "row",
+        }}
+      >
+        <View
+          style={{
+            justifyContent: "flex-start",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              paddingRight: "15%",
+            }}
+          >
+            <Text style={{ fontSize: 30, fontFamily: "Inter-SemiBold" }}>2</Text>
+          </View>
+          
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignContent: "center",
+              paddingRight: "53%",
+            }}
+          >
+            <View style={{ flexDirection: "row", borderColor: "gray" }}>
+              <View style={{ flexDirection: "column", paddingLeft: 5 }}>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 20,
+                    fontFamily: "Inter-Bold",
+                    paddingTop: 5,
+                  }}
+                >
+                  Pedro
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 14,
+                    fontFamily: "Inter-Regular",
+                    paddingLeft: 2
+                  }}
+                >
+                  Mancusi
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Text style={{ fontSize: 25, fontFamily: "Inter-SemiBold" }}>650</Text>
+          <Text style={{ fontSize: 12, fontFamily: "Inter-SemiBold" }}>Pontos</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          paddingVertical: 15,
+          paddingHorizontal: 15,
+          alignItems: "center",
+          borderColor: "rgba(0,0,0,0.11)",
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          flexDirection: "row",
+        }}
+      >
+        <View
+          style={{
+            justifyContent: "flex-start",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              paddingRight: "15%",
+            }}
+          >
+            <Text style={{ fontSize: 30, fontFamily: "Inter-SemiBold" }}>3</Text>
+          </View>
+          
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignContent: "center",
+              paddingRight: "52%",
+            }}
+          >
+            <View style={{ flexDirection: "row", borderColor: "gray" }}>
+              <View style={{ flexDirection: "column", paddingLeft: 5 }}>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 20,
+                    fontFamily: "Inter-Bold",
+                    paddingTop: 5,
+                  }}
+                >
+                  João
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 14,
+                    fontFamily: "Inter-Regular",
+                    paddingLeft: 2
+                  }}
+                >
+                  Madruga
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Text style={{ fontSize: 25, fontFamily: "Inter-SemiBold" }}>430</Text>
+          <Text style={{ fontSize: 12, fontFamily: "Inter-SemiBold" }}>Pontos</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          paddingVertical: 15,
+          paddingHorizontal: 15,
+          alignItems: "center",
+          borderColor: "rgba(0,0,0,0.11)",
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          flexDirection: "row",
+        }}
+      >
+        <View
+          style={{
+            justifyContent: "flex-start",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              paddingRight: "15%",
+            }}
+          >
+            <Text style={{ fontSize: 30, fontFamily: "Inter-SemiBold" }}>4</Text>
+          </View>
+          
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignContent: "center",
+              paddingRight: "50%",
+            }}
+          >
+            <View style={{ flexDirection: "row", borderColor: "gray" }}>
+              <View style={{ flexDirection: "column", paddingLeft: 5 }}>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 20,
+                    fontFamily: "Inter-Bold",
+                    paddingTop: 5,
+                  }}
+                >
+                  Marcos
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontSize: 14,
+                    fontFamily: "Inter-Regular",
+                    paddingLeft: 2
+                  }}
+                >
+                  Residência
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Text style={{ fontSize: 25, fontFamily: "Inter-SemiBold" }}>100</Text>
+          <Text style={{ fontSize: 12, fontFamily: "Inter-SemiBold" }}>Pontos</Text>
+        </View>
+      </View>
+      
+      
     </ScrollView>
   );
 };

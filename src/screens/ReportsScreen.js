@@ -63,13 +63,14 @@ const ReportsScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={{ padding: 15 }}>
-          <Text style={{ fontSize: 28, fontFamily: 'Inter-Bold' }}>Preencha as suas informações</Text>
-          <Text style={{ fontSize: 16, fontFamily: 'Inter-Regular', paddingRight: '30%', paddingVertical: 10 }}>Esses dados não serão exibidos no pedido para a sua anonimidade</Text>
+          <Text style={{ fontSize: 34, fontFamily: 'Inter-Bold' }}>Relatando Problema</Text>
+          <Text style={{ fontSize: 16, fontFamily: 'Inter-Regular', paddingRight: '20%', paddingVertical: 10 }}>Preencha as informações abaixo com o máximo de detalhes que puder.</Text>
         </View>
         <View style={{ padding: 14 }}>
-          <TouchableOpacity style={{ backgroundColor: 'rgba(0,0,0,0.1)', padding: 13, borderRadius: 8, marginBottom: 20 }}>
+          <TouchableOpacity style={{ padding: 13, borderRadius: 8, marginBottom: 20, borderColor: 'gray', borderWidth:1 }}>
             <TextInput
               placeholder='Titulo'
+              placeholderTextColor = "#000"
               editable={true}
               value={title}
               onChangeText={(text) => setTitle(text)}
@@ -78,12 +79,13 @@ const ReportsScreen = () => {
           <View style={{ marginBottom: 20 }}>
             <SelectList setSelected={setSelected} data={typesNotifications} placeholder='Selecione a categoria' searchPlaceholder='Pesquise pelo nome...' />
           </View>
-          <TouchableOpacity style={{ backgroundColor: 'rgba(0,0,0,0.1)', paddingLeft: 13, paddingRight: 13, paddingTop: 13, paddingBottom: '10%', borderRadius: 8, marginBottom: 20 }}>
+          <TouchableOpacity style={{ padding: 13, borderRadius: 8, marginBottom: 20, borderColor: 'gray', borderWidth:1 }}>
             <TextInput
               placeholder='Descrição'
-              editable={true}
-              maxLength={150}
+              numberOfLines={10}
               multiline={true}
+              editable={true}
+              style={{height:90}}
               value={description}
               onChangeText={(text) => setDescription(text)}
             ></TextInput>
