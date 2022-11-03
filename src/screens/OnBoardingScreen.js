@@ -8,8 +8,8 @@ const OnboardingScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white', alignContent:'center', alignItems:'center' }}>
       <View style={{ paddingHorizontal: 25}}>
       </View>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Image source={require('../assets/images/illustrations/first_screen.jpg')} style={{ height: 300, width: 300 }} />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', objectFit: "cover"}}>
+        <Image source={require('../assets/images/illustrations/logo-vertical.png')} style={{ height: 300, width: 300, resizeMode: "countain" }} />
       </View>
       <View style={{flex: 0, width:'80%'}}>
       <CustomButton label={'Continuar'} onPress={() => {navigation.navigate('Login')}}/>

@@ -11,12 +11,6 @@ const ReportView = () => {
 
   const navigation = useNavigation();
 
-  const data = [
-    { url: require("../assets/images/examples/buraco-na-rua.jpg") },
-    { url: require("../assets/images/examples/buraco-2.jpeg") },
-    { url: require("../assets/images/examples/buraco-3.jpeg") },
-  ];
-
   return (
     <ScrollView>
       <View style={{ flex: 1, paddingHorizontal: 20 }}>
@@ -162,7 +156,7 @@ const ReportView = () => {
             </Text>
           </View>
           <View>
-            <FlatListHorizontal data={data} />
+            {/* <FlatListHorizontal data={data} /> */}
           </View>
           
           <View style={{ marginTop: 30 }}>
