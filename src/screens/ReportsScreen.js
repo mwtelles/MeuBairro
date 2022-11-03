@@ -76,13 +76,13 @@ const ReportsScreen = () => {
             ></TextInput>
           </TouchableOpacity>
           <View style={{ marginBottom: 20 }}>
-            <SelectList setSelected={setSelected} data={typesNotifications} onSelect={() => alert(selected)} placeholder='Selecione a categoria' searchPlaceholder='Pesquise pelo nome...' />
+            <SelectList setSelected={setSelected} data={typesNotifications} placeholder='Selecione a categoria' searchPlaceholder='Pesquise pelo nome...' />
           </View>
           <TouchableOpacity style={{ backgroundColor: 'rgba(0,0,0,0.1)', paddingLeft: 13, paddingRight: 13, paddingTop: 13, paddingBottom: '10%', borderRadius: 8, marginBottom: 20 }}>
             <TextInput
               placeholder='Descrição'
               editable={true}
-              maxLength={80}
+              maxLength={150}
               multiline={true}
               value={description}
               onChangeText={(text) => setDescription(text)}

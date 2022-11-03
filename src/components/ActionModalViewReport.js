@@ -70,6 +70,8 @@ export function ActionModalViewReport({
           elevation: 5,
           shadowOpacity: 0.28,
           shadowRadius: 4,
+          height: 530,
+          justifyContent: "center"
         }}
       >
         {!loading ? (

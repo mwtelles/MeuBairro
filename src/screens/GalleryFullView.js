@@ -27,7 +27,7 @@ const GalleryFullView = (props) => {
         </TouchableOpacity>
       </View>
       <Image
-        source={props.route.params.url}
+        source={{uri: props.route.params.url}}
         style={{ height: Height / 1.4, width: Width}}
       />
     </View>

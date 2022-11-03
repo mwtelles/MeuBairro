@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white' }}>
       <View style={{ paddingHorizontal: 25 }}>
         <View style={{ alignItems: 'center' }}>
-          <Image source={require('../assets/images/illustrations/login.jpg')} style={{ height: 300, width: 300 }} />
+          <Image source={require('../assets/images/examples/logo-meubairro.png')} style={{ height: 300, width: 300 }} />
         </View>
         <Text style={{ fontFamily: 'Roboto-Medium', fontSize: 28, fontWeight: '700', color: '#333', marginBottom: 30, textAlign: 'center' }}>Conecte-se</Text>
         <InputField

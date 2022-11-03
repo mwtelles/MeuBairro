@@ -119,7 +119,7 @@ const Map = ({ userLocation, modalReportView, notifications }) => {
                 <View>
                   <Image
                     source={reportIcon[notification.type.toLowerCase()]}
-                    style={{ width: 45, height: 45 }}
+                    style={{ width: 55, height: 55 }}
                   />
                 </View>
 

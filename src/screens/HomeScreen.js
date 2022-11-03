@@ -173,37 +173,11 @@ export default function HomeScreen() {
                 setOpenRelate([]);
               }}
               handleNavigation={() => {
-                bottomSheetRef.current?.expand();
                 setIsVisible(false);
-                setIsBottomSheetVisible(true);
+                navigation.navigate("FullReport", {data: openRelate});
               }}
             />
           )}
-        </View>
-      )}
-      {isBottomSheetVisible && (
-        <View
-          style={{
-            flexDirection: "row-reverse",
-            zIndex: 2,
-            marginBottom: 35,
-            maxWidth: "100%",
-            height: "100%",
-          }}
-        >
-          <TouchableOpacity
-            style={{ height: "100%", width: "100%" }}
-            onPress={() => handleClosePress()}
-          ></TouchableOpacity>
-          <BottomSheet
-            ref={bottomSheetRef}
-            index={1}
-            snapPoints={[0.1, height - 280]}
-            backgroundStyle={{ backgroundColor: "white" }}
-            handleIndicatorStyle={{ backgroundColor: "#555" }}
-          >
-            <ReportView />
-          </BottomSheet>
         </View>
       )}
     </View>
